@@ -218,6 +218,10 @@ fi
 
 unset TARGETS SELECTED_TARGET
 
+if [ -n "$TARGET_ASSERT_MODEL" ] && ! grep -q "TARGET_ASSERT_MODEL" "$SRC_DIR/target/$TARGET_CODENAME/config.sh"; then
+    unset TARGET_ASSERT_MODEL
+fi
+
 echo "=============================="
 sed "/Automatically/d" "$OUT_DIR/config.sh"
 echo "=============================="
