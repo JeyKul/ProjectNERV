@@ -96,10 +96,12 @@ APPLY_SMALI_PATCHES()
                 [[ "$p" == *"UNICA"* ]] && continue
             fi
         fi
-        if [[ "$p" == *".essi."* ]] && [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "qssi" ]]; then
-            continue
+        if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "gts9"* ]] && [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "qssi" ]]; then
+            continue  # Skip if target is gts9* and not already qssi
+        elif [[ "$p" == *".essi."* ]] && [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "qssi" ]]; then
+            continue  # Skip ESSI if target is QSSI
         elif [[ "$p" == *".qssi."* ]] && [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "essi" ]]; then
-            continue
+            continue  # Skip QSSI if target is ESSI
         fi
 
         APPLY_PATCH "$PARTITION" "$FILE" "$p"
