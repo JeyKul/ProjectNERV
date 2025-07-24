@@ -71,8 +71,7 @@ APPLY_MODULE()
     return 0
 }
 
-APPLY_SMALI_PATCHES()
-{
+APPLY_SMALI_PATCHES() {
     local PATCHES_PATH="$1"
     local TARGET="$2"
 
@@ -84,11 +83,16 @@ APPLY_SMALI_PATCHES()
         return 1
     fi
 
+    local HAS_GTS9_PATCHES=false
+    if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "essi" ]]; then
+        HAS_GTS9_PATCHES=$(find "$PATCHES_PATH/$TARGET" -type f -name "*.patch" | grep -q "\.gts9\." && echo true || echo false)
+    fi
+
     while IFS= read -r p; do
         local FILE="$TARGET"
         [[ "$PARTITION" != "system" ]] && FILE="$(cut -d "/" -f 2- -s <<< "$FILE")"
 
-        # TODO remove
+	# TODO remove
         if [[ "$p" == *"0000-"* ]]; then
             if $ROM_IS_OFFICIAL; then
                 [[ "$p" == *"AOSP"* ]] && continue
@@ -96,12 +100,17 @@ APPLY_SMALI_PATCHES()
                 [[ "$p" == *"UNICA"* ]] && continue
             fi
         fi
-        if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "gts9"* ]] && [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "qssi" ]]; then
-            continue  # Skip if target is gts9* and not already qssi
-        elif [[ "$p" == *".essi."* ]] && [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "qssi" ]]; then
-            continue  # Skip ESSI if target is QSSI
-        elif [[ "$p" == *".qssi."* ]] && [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "essi" ]]; then
-            continue  # Skip QSSI if target is ESSI
+
+        if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "essi" && "$p" == *".essi."* ]]; then
+            continue
+        fi
+
+        if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "essi" && "$p" == *".qssi."* ]]; then
+            continue
+        fi
+
+        if [[ "$HAS_GTS9_PATCHES" == true && "$p" == *".qssi."* ]]; then
+            continue
         fi
 
         APPLY_PATCH "$PARTITION" "$FILE" "$p"
