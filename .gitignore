@@ -20,3 +20,7 @@ security/unica_platform.pk8
 ._.DS_Store
 ._config.sh
 ._customize.sh
+
+#i like to debug in out
+last_kmsg
+log.txt

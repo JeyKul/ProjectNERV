@@ -114,9 +114,6 @@ if [[ "$(GET_FP_SENSOR_TYPE "$SOURCE_FP_SENSOR_CONFIG")" != "$(GET_FP_SENSOR_TYP
     grep -lr "$SOURCE_FP_SENSOR_CONFIG" "$APKTOOL_DIR/system/framework/framework.jar/" | xargs -r -n 1 sed -i "s/$SOURCE_FP_SENSOR_CONFIG/$TARGET_FP_SENSOR_CONFIG/g"
 
     if [[ "$(GET_FP_SENSOR_TYPE "$TARGET_FP_SENSOR_CONFIG")" == "optical" ]]; then
-        ADD_TO_WORK_DIR "a36xqnaxx" "system" "system/bin/surfaceflinger"
-        ADD_TO_WORK_DIR "a36xqnaxx" "system" "system/lib64/libgui.so"
-        ADD_TO_WORK_DIR "a36xqnaxx" "system" "system/lib64/libui.so"
         DECODE_APK "system" "system/priv-app/BiometricSetting/BiometricSetting.apk"
     elif [[ "$(GET_FP_SENSOR_TYPE "$TARGET_FP_SENSOR_CONFIG")" == "side" ]]; then
         ADD_TO_WORK_DIR "b5qxxx" "system" "."
@@ -184,29 +181,6 @@ fi
 #        true
 #    fi
 #fi
-
-if ! $SOURCE_HAS_QHD_DISPLAY; then
-    if $TARGET_HAS_QHD_DISPLAY; then
-        LOG_STEP_IN "- Applying multi resolution patches"
-        if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "qssi" ]]; then
-            SOURCE="dm3qxxx"
-        elif [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "essi" ]]; then
-            SOURCE="b0sxxx"
-        fi
-        ADD_TO_WORK_DIR "$SOURCE" "system" "system/bin/bootanimation" 0 2000 755 "u:object_r:bootanim_exec:s0"
-        ADD_TO_WORK_DIR "$SOURCE" "system" "system/bin/surfaceflinger" 0 2000 755 "u:object_r:surfaceflinger_exec:s0"
-        ADD_TO_WORK_DIR "$SOURCE" "system" "system/lib/libgui.so" 0 0 644 "u:object_r:system_lib_file:s0"
-        ADD_TO_WORK_DIR "$SOURCE" "system" "system/lib64/libgui.so" 0 0 644 "u:object_r:system_lib_file:s0"
-        APPLY_PATCH "system" "system/framework/framework.jar" "$SRC_DIR/unica/patches/product_feature/resolution/framework.jar/0001-Enable-dynamic-resolution-control.patch"
-        APPLY_PATCH "system" "system/priv-app/SecSettings/SecSettings.apk" "$SRC_DIR/unica/patches/product_feature/resolution/SecSettings.apk/0001-Enable-dynamic-resolution-control.patch"
-        LOG_STEP_OUT
-    fi
-else
-    if ! $TARGET_HAS_QHD_DISPLAY; then
-        # TODO: won't be necessary anyway
-        true
-    fi
-fi
 
 if [[ "$SOURCE_HFR_MODE" != "$TARGET_HFR_MODE" ]]; then
     LOG_STEP_IN "- Applying HFR_MODE patches"
