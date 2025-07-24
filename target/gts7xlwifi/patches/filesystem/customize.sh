@@ -1,13 +1,14 @@
 SKIPUNZIP=1
 
-if $TARGET_FS_CHANGED; then
-    LOG "- Copying patched fstab to /vendor/etc"
-    cp -f "$SRC_DIR/target/$TARGET_CODENAME/patches/filesystem/vendor/etc/fstab.qcom" "$WORK_DIR/vendor/etc"
+ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "vendor" "etc/fstab.qcom"
 
-    # r9q's fstab file in vendor_boot is "fstab.qcom", while in vendor it's "fstab.default"
-    # the patched file is named ".qcom" due to the filesystem patch script
-    # for now, let's keep it this way and rename it after copying it to vendor
-    rm -f "$WORK_DIR/vendor/etc/fstab.default"
-else
-    LOG "- TARGET_OS_FILE_SYSTEM is set to its default value. Ignoring"
-fi
+sed -i '/^\(product\|vendor\|odm\)[[:space:]]\+\/\(product\|vendor\|odm\)[[:space:]]\+ext4/ {
+  p
+  s/ext4/erofs/
+}' $WORK_DIR/vendor/etc/fstab.qcom
+
+sed -i 's/fileencryption=ice/fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized/g' $WORK_DIR/vendor/etc/fstab.qcom
+
+echo "Remove DualDAR mount points"
+sed -i "/keydata/d" "$WORK_DIR/vendor/etc/fstab.qcom"
+sed -i "/keyrefuge/d" "$WORK_DIR/vendor/etc/fstab.qcom"
