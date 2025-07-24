@@ -1,6 +1,6 @@
-From 60fbd2936beb75ae976f0a043b46c63273d7c3a5 Mon Sep 17 00:00:00 2001
+From f97baa8d7ae68807bda99d2b966db5620e1aa758 Mon Sep 17 00:00:00 2001
 From: ExtremeXT <75576145+ExtremeXT@users.noreply.github.com>
-Date: Sat, 26 Apr 2025 21:16:45 +0300
+Date: Sat, 26 Apr 2025 21:25:07 +0300
 Subject: [PATCH] Nuke Knox DualDAR and HDM version
 
 Signed-off-by: utkustnr <utkuustuner@proton.me>
@@ -9,10 +9,10 @@ Signed-off-by: utkustnr <utkuustuner@proton.me>
  .../samsung/android/knox/hdm/HdmManager.smali | 58 +------------------
  2 files changed, 3 insertions(+), 57 deletions(-)
 
-diff --git a/smali_classes2/com/samsung/android/knox/ddar/DualDARPolicy.smali b/smali_classes2/com/samsung/android/knox/ddar/DualDARPolicy.smali
+diff --git a/smali/com/samsung/android/knox/ddar/DualDARPolicy.smali b/smali/com/samsung/android/knox/ddar/DualDARPolicy.smali
 index 3f2611d..0e908ae 100644
---- a/smali_classes2/com/samsung/android/knox/ddar/DualDARPolicy.smali
-+++ b/smali_classes2/com/samsung/android/knox/ddar/DualDARPolicy.smali
+--- a/smali/com/samsung/android/knox/ddar/DualDARPolicy.smali
++++ b/smali/com/samsung/android/knox/ddar/DualDARPolicy.smali
 @@ -94,7 +94,7 @@
  .method public static getDualDARVersion()Ljava/lang/String;
      .locals 1
@@ -22,10 +22,10 @@ index 3f2611d..0e908ae 100644
  
      return-object v0
  .end method
-diff --git a/smali_classes2/com/samsung/android/knox/hdm/HdmManager.smali b/smali_classes2/com/samsung/android/knox/hdm/HdmManager.smali
+diff --git a/smali/com/samsung/android/knox/hdm/HdmManager.smali b/smali/com/samsung/android/knox/hdm/HdmManager.smali
 index 5eabaaa..3c710bc 100644
---- a/smali_classes2/com/samsung/android/knox/hdm/HdmManager.smali
-+++ b/smali_classes2/com/samsung/android/knox/hdm/HdmManager.smali
+--- a/smali/com/samsung/android/knox/hdm/HdmManager.smali
++++ b/smali/com/samsung/android/knox/hdm/HdmManager.smali
 @@ -63,7 +63,7 @@
  .end method
  
@@ -86,7 +86,7 @@ index 5eabaaa..3c710bc 100644
 -
 -    invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 -
--    const-string v1, "115"
+-    const-string v1, "1DD"
 -
 -    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 -
