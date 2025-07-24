@@ -120,7 +120,6 @@ if [[ "$(GET_FP_SENSOR_TYPE "$SOURCE_FP_SENSOR_CONFIG")" != "$(GET_FP_SENSOR_TYP
         DECODE_APK "system" "system/priv-app/BiometricSetting/BiometricSetting.apk"
     elif [[ "$(GET_FP_SENSOR_TYPE "$TARGET_FP_SENSOR_CONFIG")" == "side" ]]; then
         ADD_TO_WORK_DIR "b5qxxx" "system" "."
-            APPLY_PATCH "system" "system/framework/services.jar" "$SRC_DIR/unica/patches/product_feature/fingerprint/services.jar/0002-Set-FP_FEATURE_SENSOR_IS_IN_DISPLAY_TYPE-to-false.qssi.patch"
     elif [[ "$(GET_FP_SENSOR_TYPE "$TARGET_FP_SENSOR_CONFIG")" == "ultrasonic" ]]; then
         ADD_TO_WORK_DIR "r0sxxx" "system" "." 0 0 755 "u:object_r:system_file:s0"
         APPLY_PATCH "system" "system_ext/priv-app/SystemUI/SystemUI.apk" "$SRC_DIR/unica/patches/product_feature/fingerprint/SystemUI.apk/0001-Add-ultrasonic-FOD-support.patch"
