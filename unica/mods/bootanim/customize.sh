@@ -1,5 +1,5 @@
 TWOTHREE_TARGETS=""
-TWOFOUR_TARGETS="a52sxq a73xq m52xq r8q r9q r9q2"
+TWOFOUR_TARGETS="a52sxq a53x a73xq m52xq r8q r9q r9q2"
 
 if echo "$TWOTHREE_TARGETS" | grep -q -w "$TARGET_CODENAME"; then
     cp -a --preserve=all "$SRC_DIR/unica/mods/bootanim/2340x1080/"* "$WORK_DIR/system/system/media"
@@ -19,3 +19,4 @@ SET_PROP "vendor" "ro.config.media_sound" "Media_preview_Touch_the_light.ogg"
 SET_PROP "vendor" "ro.config.ringtone_2" "ACH_Atomic_Bell.ogg"
 SET_PROP "vendor" "ro.config.notification_sound_2" "ACH_Three_Star.ogg" 
 LOG_STEP_OUT
+
