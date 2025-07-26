@@ -44,7 +44,7 @@ TARGET_DEVICE="$TARGET_CODENAME"
 [ -n "$TARGET_MODEL" ] && TARGET_DEVICE="$TARGET_MODEL"
 
 # Set custom Display ID prop
-SET_PROP "system" "ro.build.display.id" "Project NERV $(echo -n ${ROM_VERSION} | cut -d "-" -f1)-${ROM_CODENAME} - ${TARGET_DEVICE} [$(GET_PROP "system" "ro.build.display.id")]"
+SET_PROP "system" "ro.build.display.id" "Terracotta Rom | Based on UN1CA and Project NERV | $(echo -n ${ROM_VERSION} | cut -d "-" -f1)-${ROM_CODENAME} - ${TARGET_DEVICE} [$(GET_PROP "system" "ro.build.display.id")]"
 
 # Crok's RAM Managment Fix
 # https://github.com/crok/crokrammgmtfix/blob/master/service.sh#L27-L32
