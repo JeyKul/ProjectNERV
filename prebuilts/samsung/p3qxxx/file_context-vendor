@@ -1,0 +1,1 @@
+/vendor/bin/hw/wpa_supplicant u:object_r:hal_wifi_supplicant_default_exec:s0
