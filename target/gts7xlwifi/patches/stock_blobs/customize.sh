@@ -31,6 +31,8 @@ ADD_TO_WORK_DIR "p3qxxx" "system" "system/lib/libremotedisplay_wfd.so" 0 0 644 "
 ADD_TO_WORK_DIR "p3qxxx" "system" "system/lib/libremotedisplayservice.so" 0 0 644 "u:object_r:system_lib_file:s0"
 ADD_TO_WORK_DIR "p3qxxx" "system" "system/lib/libsecuibc.so" 0 0 644 "u:object_r:system_lib_file:s0"
 ADD_TO_WORK_DIR "p3qxxx" "system" "system/lib/libstagefright_hdcp.so" 0 0 644 "u:object_r:system_lib_file:s0"
+ADD_TO_WORK_DIR "p3qxxx" "system" "system/lib/libstagefright_hdcp.so" 0 0 644 "u:object_r:system_lib_file:s0"
+ADD_TO_WORK_DIR "p3qxxx" "system" "system/lib/wfd_log.so" 0 2000 755 "u:object_r:system_lib_file:s0"
 ADD_TO_WORK_DIR "p3qxxx" "vendor" "bin/hw/wpa_supplicant" 0 2000 755 "u:object_r:hal_wifi_supplicant_default_exec:s0"
 LOG_STEP_OUT
 
