@@ -83,11 +83,6 @@ APPLY_SMALI_PATCHES() {
         return 1
     fi
 
-    local HAS_GTS9_PATCHES=false
-    if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "essi" ]]; then
-        HAS_GTS9_PATCHES=$(find "$PATCHES_PATH/$TARGET" -type f -name "*.patch" | grep -q "\.gts9\." && echo true || echo false)
-    fi
-
     while IFS= read -r p; do
         local FILE="$TARGET"
         [[ "$PARTITION" != "system" ]] && FILE="$(cut -d "/" -f 2- -s <<< "$FILE")"
@@ -101,15 +96,10 @@ APPLY_SMALI_PATCHES() {
             fi
         fi
 
-        if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "essi" && "$p" == *".essi."* ]]; then
-            continue
-        fi
 
-        if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "essi" && "$p" == *".qssi."* ]]; then
+        if [[ "$p" == *".gts9p."* ]] && [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "gts9pwifi" ]]; then
             continue
-        fi
-
-        if [[ "$HAS_GTS9_PATCHES" == true && "$p" == *".qssi."* ]]; then
+        elif [[ "$p" == *".gts9pwifi."* ]] && [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "gts9p" ]]; then
             continue
         fi
 
