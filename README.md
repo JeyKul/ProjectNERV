@@ -24,32 +24,24 @@ Its build system allows to automatically download/extract the firmware, apply th
 Any form of contribution, suggestions, bug report or feature request for the project will be welcome.
 
 # Features
-- Based on the latest stable Galaxy S23 firmware
+- Based on the latest stable Galaxy S23 (Paradigm) / A73 5G (Fun) Firmware
 - Galaxy AI support
 - High end animations
-- Native/live blur support
+- Native/live blur support (Paradigm)
 - AOD clock transition support
-- Adaptive color tone support
-- Adaptive refresh rate support
+- Adaptive refresh rate support (Paradigm)
 - Extra brightness support
 - Picture remaster support
 - Object, shadow and reflection eraser support
 - Image clipper support
 - Smart Suggestions widget
+- Samsung Now Brief support (Fun)
 - Multi user support
-- Samsung DeX support
+- Samsung DeX support (Paradigm)
 - Camera privacy toggle support
 - Debloated from useless system services/additional apps
-- Integrated OTA updates app
-- Play Integrity Fix included
 - [BluetoothLibraryPatcher](https://github.com/3arthur6/BluetoothLibraryPatcher) included
-- [FrameworkPatch](https://github.com/chiteroman/FrameworkPatch) implemented in system frameworks
 - [KnoxPatch](https://github.com/salvogiangri/KnoxPatch) implemented in system frameworks
-- China Device Care app included
-- [Patched GoodLock](https://github.com/corsicanu/goodlock_dump) app included
-- Unlimited backup storage on Google Photos
-- Extra mods (Live blur toggle, FOD animation style, secure screenshot toggle, app downgrade toggle, Dual Messenger on all apps)
-- Extra CSC features (Call recording, Hiya, Network speed in status bar, AltZLife)
 
 # Licensing
 This project is licensed under the terms of the [GNU General Public License v3.0](LICENSE). External dependencies might be distributed under a different license, such as:
