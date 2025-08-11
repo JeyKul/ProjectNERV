@@ -37,7 +37,7 @@ system/etc/init/ssu.rc
 system/etc/permissions/privapp-permissions-com.samsung.ssu.xml
 system/etc/sysconfig/samsungsimunlock.xml
 system/lib64/android.security.securekeygeneration-ndk.so
-system/lib64/libssu_keystore2.so
+system/lib64/ssu_keystore2.so
 system/priv-app/SsuService
 "
 
@@ -118,7 +118,6 @@ system/hidden/SmartTutor
 system/preload
 system/priv-app/AuthFramework
 system/priv-app/BCService
-system/priv-app/CIDManager
 system/priv-app/DeviceKeystring
 system/priv-app/DeXonPC
 system/priv-app/DiagMonAgent94
