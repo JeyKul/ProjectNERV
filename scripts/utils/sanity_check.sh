@@ -150,4 +150,5 @@ else
     echo -e "\n✅ No missing packages!"
 fi
 
-echo -e "\nDone."
+echo -e "\nDone. If you fixed the dependencies run \"source buildenv.sh\""
+
