@@ -7,9 +7,12 @@
 /vendor/etc/init u:object_r:vendor_configs_file:s0
 /vendor/etc/init/vendor\.qti\.hardware\.display\.composer-service\.rc u:object_r:vendor_configs_file:s0
 /vendor/etc/vintf u:object_r:vendor_configs_file:s0
+/vendor/etc/vintf/compatibility_matrix\.xml u:object_r:vendor_configs_file:s0
 /vendor/etc/vintf/manifest u:object_r:vendor_configs_file:s0
 /vendor/etc/vintf/manifest/vendor\.qti\.hardware\.display\.composer-service\.xml u:object_r:vendor_configs_file:s0
+/vendor/etc/vintf/manifest\.xml u:object_r:vendor_configs_file:s0
 /vendor/lib64 u:object_r:vendor_file:s0
+/vendor/lib64/libSemTelephonyProps\.so u:object_r:vendor_file:s0
 /vendor/lib64/android\.hardware\.graphics\.composer@2\.1-resources\.so u:object_r:vendor_file:s0
 /vendor/lib64/android\.hardware\.graphics\.composer@2\.2-resources\.so u:object_r:vendor_file:s0
 /vendor/lib64/libdisplayconfig\.so u:object_r:vendor_file:s0
@@ -24,6 +27,7 @@
 /vendor/lib64/libhdrdynamicootf\.so u:object_r:vendor_file:s0
 /vendor/lib64/libhistogram\.so u:object_r:vendor_file:s0
 /vendor/lib64/libqseed3\.so u:object_r:vendor_file:s0
+/vendor/lib64/libril_sem\.so u:object_r:vendor_file:s0
 /vendor/lib64/libsdedrm\.so u:object_r:vendor_file:s0
 /vendor/lib64/libsdm-color\.so u:object_r:vendor_file:s0
 /vendor/lib64/libsdm-colormgr-algo\.so u:object_r:vendor_file:s0
@@ -32,6 +36,7 @@
 /vendor/lib64/libsdm-disp-vndapis\.so u:object_r:vendor_file:s0
 /vendor/lib64/libsdmextension\.so u:object_r:vendor_file:s0
 /vendor/lib64/libsdmutils\.so u:object_r:vendor_file:s0
+/vendor/lib64/libsec-ril\.so u:object_r:vendor_file:s0
 /vendor/lib64/libtinyxml2_1\.so u:object_r:vendor_file:s0
 /vendor/lib64/vendor\.qti\.hardware\.display\.composer@1\.0\.so u:object_r:vendor_file:s0
 /vendor/lib64/vendor\.qti\.hardware\.display\.composer@2\.0\.so u:object_r:vendor_file:s0

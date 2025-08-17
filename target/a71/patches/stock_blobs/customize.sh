@@ -2,7 +2,7 @@ ADD_TO_WORK_DIR "a52qnsxx" "system" "system/lib/libSlowShutter_jni.media.samsung
 ADD_TO_WORK_DIR "a52qnsxx" "system" "system/lib64/libSlowShutter_jni.media.samsung.so" 0 0 644 "u:object_r:system_lib_file:s0"
 ADD_TO_WORK_DIR "a52qnsxx" "system" "system/lib64/libsamsung_videoengine_9_0.so" 0 0 644 "u:object_r:system_lib_file:s0"
 
-LOG_STEP_IN "- Add a73 WFD blobs"
+LOG_STEP_IN "- Adding a73xqxx WFD blobs"
 DELETE_FROM_WORK_DIR "system" "system/lib64/libhdcp_client_aidl.so"
 DELETE_FROM_WORK_DIR "system" "system/lib64/vendor.samsung.hardware.security.hdcp.wifidisplay-V2-ndk.so"
 ADD_TO_WORK_DIR "a73xqxx" "system" "system/bin/insthk" 0 2000 755 "u:object_r:insthk_exec:s0"
@@ -15,11 +15,11 @@ ADD_TO_WORK_DIR "a73xqxx" "system" "system/lib64/libsecuibc.so" 0 0 644 "u:objec
 ADD_TO_WORK_DIR "a73xqxx" "system" "system/lib64/libstagefright_hdcp.so" 0 0 644 "u:object_r:system_lib_file:s0"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Add a73 wpa_supplicant"
+LOG_STEP_IN "- Adding a73xqxx wpa_supplicant"
 ADD_TO_WORK_DIR "a73xqxx" "vendor" "bin/hw/wpa_supplicant"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Add stock SoundBooster libs"
+LOG_STEP_IN "- Adding a52qnsxx SoundBooster libs"
 DELETE_FROM_WORK_DIR "system" "system/lib/lib_SoundBooster_ver1100.so"
 DELETE_FROM_WORK_DIR "system" "system/lib64/lib_SoundBooster_ver1100.so"
 ADD_TO_WORK_DIR "a52qnsxx" "system" "system/lib/lib_SoundBooster_ver1050.so" 0 0 644 "u:object_r:system_lib_file:s0"
@@ -28,19 +28,17 @@ ADD_TO_WORK_DIR "a52qnsxx" "system" "system/lib64/lib_SoundBooster_ver1050.so" 0
 ADD_TO_WORK_DIR "a52qnsxx" "system" "system/lib64/libsamsungSoundbooster_plus_legacy.so" 0 0 644 "u:object_r:system_lib_file:s0"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Fix MIDAS"
-DELETE_FROM_WORK_DIR "vendor" "etc/midas"
-DELETE_FROM_WORK_DIR "vendor" "etc/VslMesDetector"
+LOG_STEP_IN "- Fixing MIDAS"
 ADD_TO_WORK_DIR "a52qnsxx" "vendor" "etc/midas" 0 2000 755 "u:object_r:vendor_configs_file:s0"
 ADD_TO_WORK_DIR "a52qnsxx" "vendor" "etc/VslMesDetector" 0 2000 755 "u:object_r:vendor_configs_file:s0"
 sed -i "s/ro.product.device/ro.product.vendor.device/g" "$WORK_DIR/vendor/etc/midas/midas_config.json"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Fix RIL"
+LOG_STEP_IN "- Fixing RIL"
 sed -i "s/1.4::IRadio/1.5::IRadio/g" "$WORK_DIR/vendor/etc/vintf/manifest.xml"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Fix face unlock"
+LOG_STEP_IN "- Adding a73xqxx biometric blobs"
 DELETE_FROM_WORK_DIR "vendor" "bin/hw/vendor.samsung.hardware.biometrics.face@2.0-service"
 DELETE_FROM_WORK_DIR "vendor" "etc/init/vendor.samsung.hardware.biometrics.face@2.0-service.rc"
 ADD_TO_WORK_DIR "a73xqxx" "vendor" "bin/hw/vendor.samsung.hardware.biometrics.face@3.0-service"
@@ -51,27 +49,24 @@ ADD_TO_WORK_DIR "a73xqxx" "vendor" "lib64/vendor.samsung.hardware.biometrics.fac
 ADD_TO_WORK_DIR "a73xqxx" "vendor" "lib64/vendor.samsung.hardware.biometrics.face@3.0.so"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Fixing autobrightness"
+LOG_STEP_IN "- Adding a73xqxx light blobs"
 ADD_TO_WORK_DIR "a73xqxx" "vendor" "bin/hw/vendor.samsung.hardware.light-service"
 ADD_TO_WORK_DIR "a73xqxx" "vendor" "lib64/android.hardware.light-V1-ndk_platform.so"
 ADD_TO_WORK_DIR "a73xqxx" "vendor" "lib64/vendor.samsung.hardware.light-V1-ndk_platform.so"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Add stock rscmgr.rc"
+LOG_STEP_IN "- Adding stock rscmgr.rc"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/etc/init/rscmgr.rc" 0 0 644 "u:object_r:system_file:s0"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Add stock CameraLightSensor app"
-ADD_TO_WORK_DIR "a52qnsxx" "system" "system/etc/permissions/privapp-permissions-com.samsung.adaptivebrightnessgo.cameralightsensor.xml" \
-    0 0 644 "u:object_r:system_file:s0"
+LOG_STEP_IN "- Adding a52qnsxx CameraLightSensor app"
+ADD_TO_WORK_DIR "a52qnsxx" "system" "system/etc/permissions/privapp-permissions-com.samsung.adaptivebrightnessgo.cameralightsensor.xml" 0 0 644 "u:object_r:system_file:s0"
 ADD_TO_WORK_DIR "a52qnsxx" "system" "system/priv-app/CameraLightSensor/CameraLightSensor.apk" 0 0 644 "u:object_r:system_file:s0"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Add stock FM Radio app"
-ADD_TO_WORK_DIR "a52qnsxx" "system" "system/etc/permissions/privapp-permissions-com.sec.android.app.fm.xml" \
-    0 0 644 "u:object_r:system_file:s0"
-ADD_TO_WORK_DIR "a52qnsxx" "system" "system/etc/sysconfig/preinstalled-packages-com.sec.android.app.fm.xml" \
-    0 0 644 "u:object_r:system_file:s0"
+LOG_STEP_IN "- Adding a52qnsxx FMRadio blobs"
+ADD_TO_WORK_DIR "a52qnsxx" "system" "system/etc/permissions/privapp-permissions-com.sec.android.app.fm.xml" 0 0 644 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "a52qnsxx" "system" "system/etc/sysconfig/preinstalled-packages-com.sec.android.app.fm.xml" 0 0 644 "u:object_r:system_file:s0"
 ADD_TO_WORK_DIR "a52qnsxx" "system" "system/priv-app/HybridRadio/HybridRadio.apk" 0 0 644 "u:object_r:system_file:s0"
 ADD_TO_WORK_DIR "a52qnsxx" "system" "system/lib/libfmradio_jni.so" 0 0 644 "u:object_r:system_lib_file:s0"
 ADD_TO_WORK_DIR "a52qnsxx" "system" "system/lib64/libfmradio_jni.so" 0 0 644 "u:object_r:system_lib_file:s0"
@@ -89,7 +84,7 @@ LOG_STEP_IN "- Add A73 vintf manifest"
 ADD_TO_WORK_DIR "a73xqxx" "system" "system/etc/vintf/manifest.xml" 0 0 644 "u:object_r:system_file:s0"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Add stock system features"
+LOG_STEP_IN "- Adding stock system features"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.samsung.feature.audio_fast_listenback.xml"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.samsung.feature.audio_listenback.xml"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.cover.clearcameraviewcover.xml"
@@ -104,15 +99,19 @@ ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/etc/permissions/com.sec.feat
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/etc/permissions/com.sec.feature.sensorhub_level34.xml" 0 0 644 "u:object_r:system_file:s0"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Add stock TUI app"
-ADD_TO_WORK_DIR "a52qnsxx" "system" "system/etc/sysconfig/preinstalled-packages-com.qualcomm.qti.services.secureui.xml" \
-    0 0 644 "u:object_r:system_file:s0"
-ADD_TO_WORK_DIR "a52qnsxx" "system_ext" "app/com.qualcomm.qti.services.secureui/com.qualcomm.qti.services.secureui.apk" \
-    0 0 644 "u:object_r:system_file:s0"
+LOG_STEP_IN "- Adding a52qnsxx TUI app"
+ADD_TO_WORK_DIR "a52qnsxx" "system" "system/etc/sysconfig/preinstalled-packages-com.qualcomm.qti.services.secureui.xml" 0 0 644 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "a52qnsxx" "system_ext" "app/com.qualcomm.qti.services.secureui/com.qualcomm.qti.services.secureui.apk" 0 0 644 "u:object_r:system_file:s0"
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Nuking NFC"
+LOG_STEP_IN "- Removing NFC"
 DELETE_FROM_WORK_DIR "vendor" "etc/init/nxp.android.hardware.nfc@1.1-service.rc"
 DELETE_FROM_WORK_DIR "odm" "etc/vintf"
 DELETE_FROM_WORK_DIR "odm" "etc/permissions"
+LOG_STEP_OUT
+
+LOG_STEP_IN "- Removing Legacy HWComposer"
+DELETE_FROM_WORK_DIR "vendor" "bin/hw/android.hardware.graphics.composer@2.4-service"
+DELETE_FROM_WORK_DIR "vendor" "etc/init/android.hardware.graphics.composer@2.4-service.rc"
+DELETE_FROM_WORK_DIR "vendor" "etc/vintf/manifest/android.hardware.graphics.composer-qti-display.xml"
 LOG_STEP_OUT
