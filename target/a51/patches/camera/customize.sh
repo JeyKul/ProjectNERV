@@ -10,4 +10,3 @@ sed -i \
     "$WORK_DIR/system/system/lib64/libPortraitSolution.camera.samsung.so"
 
 LOG_STEP_OUT
-
