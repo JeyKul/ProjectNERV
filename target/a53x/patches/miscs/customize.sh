@@ -1,8 +1,3 @@
-LOG_STEP_IN
-MODEL=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 1)
-SET_PROP "system" "ro.factory.model" "$MODEL"
-LOG_STEP_OUT
-
 LOG_STEP_IN "- Improving WiFi/Mobile Data speeds"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "product" "app/ConnectivityUxOverlay" 0 0 755 "u:object_r:system_file:s0"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "product" "app/NetworkStackOverlay" 0 0 755 "u:object_r:system_file:s0"
@@ -23,4 +18,3 @@ do
 done
 
 LOG_STEP_OUT
-
