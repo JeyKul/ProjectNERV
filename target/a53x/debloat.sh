@@ -20,12 +20,6 @@
 # - DO NOT add the partition name at the start of any entry (eg. "/system/dpolicy_system")
 # - DO NOT add a slash at the start of any entry (eg. "/dpolicy_system")
 
-# GameDriver
-SYSTEM_DEBLOAT+="
-system/priv-app/DevGPUDriver-EX2200
-system/priv-app/GameDriver-EX2200
-"
-
 # system_ext clean-up
 SYSTEM_DEBLOAT+="
 system/etc/permissions/org.carconnectivity.android.digitalkey.rangingintent.xml
@@ -51,11 +45,9 @@ overlay/SoftapOverlayQC
 SYSTEM_DEBLOAT+="
 system/etc/default-permissions/default-permissions-com.samsung.android.globalpostprocmgr.xml
 system/etc/default-permissions/default-permissions-com.samsung.petservice.xml
-system/etc/default-permissions/default-permissions-com.samsung.videoscan.xml
 system/etc/permissions/cameraservice.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.globalpostprocmgr.xml
 system/etc/permissions/privapp-permissions-com.samsung.petservice.xml
-system/etc/permissions/privapp-permissions-com.samsung.videoscan.xml
 system/etc/permissions/sec_camerax_impl.xml
 system/etc/permissions/sec_camerax_service.xml
 system/framework/sec_camerax_impl.jar
@@ -64,7 +56,6 @@ system/priv-app/GlobalPostProcMgr
 system/priv-app/PetService
 system/priv-app/SCameraSDKService
 system/priv-app/sec_camerax_service
-system/priv-app/VideoScan
 "
 
 # mAFPC
