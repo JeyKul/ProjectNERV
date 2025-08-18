@@ -1,0 +1,26 @@
+# Android fstab file.
+#<src>                  <mnt_point>         <type>    <mnt_flags and options>                               <fs_mgr_flags>
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+system		/system		ext4		ro,barrier=1		wait,avb=vbmeta,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
+vendor		/vendor		ext4		ro,barrier=1		wait,avb,logical,first_stage_mount
+product		/product	ext4		ro,errors=panic		wait,avb,logical,first_stage_mount
+odm			/odm		ext4		ro,errors=panic		wait,avb,logical,first_stage_mount
+
+/dev/block/by-name/prism	/prism	ext4	ro,barrier=1	nofail,avb,first_stage_mount
+/dev/block/by-name/optics	/optics	ext4	ro,barrier=1	nofail,avb,first_stage_mount
+/dev/block/by-name/metadata	/metadata	ext4	noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic,sync	wait,first_stage_mount,formattable,check
+
+/dev/block/by-name/cache	/cache	ext4	noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic	wait,check
+/dev/block/by-name/userdata	/data	f2fs	noatime,nosuid,nodev,discard,usrquota,grpquota,fsync_mode=nobarrier,reserve_root=32768,resgid=5678	latemount,wait,check,quota,reservedsize=128M,checkpoint=fs
+/dev/block/by-name/efs	/mnt/vendor/efs	ext4	noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic	wait,check
+/dev/block/by-name/cpefs	/mnt/vendor/cpefs	ext4	noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic	wait,check,nofail
+/dev/block/by-name/misc	/misc	emmc	defaults	defaults,first_stage_mount
+
+# VOLD:fstab.exynos9610
+#/dev/block/platform/13500000.dwmmc0/by-name/hidden                  /preload    ext4    defaults    voldmanaged=preload:auto
+/devices/platform/13550000.dwmmc2/mmc_host/*                         auto        vfat    defaults    voldmanaged=sdcard:auto
+/devices/platform/13200000.usb/13200000.dwc3/xhci-hcd.2.auto/usb*    auto        auto    defaults    voldmanaged=usb:auto
+
+/dev/block/zram0	none		swap	defaults	zramsize=2684354560,max_comp_streams=8

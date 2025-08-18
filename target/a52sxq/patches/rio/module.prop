@@ -1,0 +1,4 @@
+id=rio
+name=RIO Kernel
+author=utkustnr
+description=Replace stock kernel with upstreamed, experimental RIO kernel based on QCOM SM8350.
