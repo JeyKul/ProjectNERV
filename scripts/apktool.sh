@@ -42,8 +42,8 @@ BUILD()
     mkdir -p "$OUTPUT_PATH/build/apk"
     cp -a "$OUTPUT_PATH/original/META-INF" "$OUTPUT_PATH/build/apk/META-INF"
 
-    # Build APK with --shorten-resource-paths (https://developer.android.com/tools/aapt2#optimize_options)
-    EVAL "apktool b -j \"$(nproc)\" -p \"$FRAMEWORK_DIR\" -srp \"$OUTPUT_PATH\"" || exit 1
+    # Build APK
+    EVAL "apktool b -j \"$(nproc)\" -p \"$FRAMEWORK_DIR\" \"$OUTPUT_PATH\"" || exit 1
 
     local FILE_NAME
     FILE_NAME="$(basename "$INPUT_FILE")"
