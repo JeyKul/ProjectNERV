@@ -21,6 +21,7 @@
 prebuilts/bootable/deprecated-ota/updater binary
 prebuilts/kernels/*/* binary
 prebuilts/*/*/*/** binary
+unica/mods/rezetprop/system/bin/rezetprop binary
 
 # Device-specific prebuilt blobs
 target/a52sxq/patches/wpss/vendor/firmware/** binary
