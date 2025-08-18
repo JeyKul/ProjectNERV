@@ -512,7 +512,7 @@ while IFS= read -r f; do
     IS_VALID_PARTITION_NAME "$PARTITION" || continue
 
     "$SRC_DIR/scripts/build_fs_image.sh" "$TARGET_OS_FILE_SYSTEM" \
-        -o "$TMP_DIR/$PARTITION.img" -m -S \
+        -o "$TMP_DIR/$PARTITION.img" -S \
         "$WORK_DIR/$PARTITION" "$WORK_DIR/configs/file_context-$PARTITION" "$WORK_DIR/configs/fs_config-$PARTITION" || exit 1
 done < <(find "$WORK_DIR" -maxdepth 1 -type d)
 LOG_STEP_OUT
@@ -528,8 +528,8 @@ while IFS= read -r f; do
     IS_VALID_PARTITION_NAME "$PARTITION" || continue
 
     LOG "- Converting $PARTITION.img to $PARTITION.new.dat"
-    EVAL "img2sdat -o \"$TMP_DIR\" -B \"$TMP_DIR/$PARTITION.map\" \"$f\"" || exit 1
-    rm -f "$f" "$TMP_DIR/$PARTITION.map"
+    EVAL "img2sdat -o \"$TMP_DIR\" \"$f\"" || exit 1
+    rm -f "$f"
 
     if ! $DEBUG; then
         LOG "- Compressing $PARTITION.new.dat"
