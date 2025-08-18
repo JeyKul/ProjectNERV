@@ -2,6 +2,9 @@ name: Build ProjectNERV
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'paradigm'
 
 jobs:
   build:
