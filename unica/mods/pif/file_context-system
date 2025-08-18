@@ -1,3 +1,0 @@
-/system u:object_r:system_file:s0
-/system/bin u:object_r:system_file:s0
-/system/bin/rezetprop u:object_r:init_exec:s0
