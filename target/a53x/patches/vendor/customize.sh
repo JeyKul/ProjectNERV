@@ -2,15 +2,6 @@ SKIPUNZIP=1
 TARGET_FIRMWARE_PATH="$FW_DIR/$(echo -n "$TARGET_FIRMWARE" | sed 's./._.g' | rev | cut -d "_" -f2- | rev)"
 TARGET_MODEL="$(echo "$TARGET_FIRMWARE" | cut -d'/' -f1)"
 
-## GPU Blobs
-LOG_STEP_IN "- Adding newer GPU Blobs"
-ADD_TO_WORK_DIR "$SRC_DIR/target/$TARGET_CODENAME/patches/vendor" "vendor" "etc/permissions" 0 0 644 "u:object_r:vendor_configs_file:s0"
-ADD_TO_WORK_DIR "$SRC_DIR/target/$TARGET_CODENAME/patches/vendor" "vendor" "etc/snap_gpu_kernel_64.bin" 0 0 644 "u:object_r:vendor_configs_file:s0"
-ADD_TO_WORK_DIR "$SRC_DIR/target/$TARGET_CODENAME/patches/vendor" "vendor" "etc/snaplite_cache.bin" 0 0 644 "u:object_r:vendor_configs_file:s0"
-ADD_TO_WORK_DIR "$SRC_DIR/target/$TARGET_CODENAME/patches/vendor" "vendor" "lib" 0 0 644 "u:object_r:same_process_hal_file:s0"
-ADD_TO_WORK_DIR "$SRC_DIR/target/$TARGET_CODENAME/patches/vendor" "vendor" "lib64" 0 0 644 "u:object_r:same_process_hal_file:s0"
-LOG_STEP_OUT
-
 LOG_STEP_IN "- Adding support for other $TARGET_CODENAME models"
 
 ## Firmware

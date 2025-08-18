@@ -25,7 +25,7 @@ unica/mods/rezetprop/system/bin/rezetprop binary
 
 # Device-specific prebuilt blobs
 target/a52sxq/patches/wpss/vendor/firmware/** binary
-target/a53x/patches/vendor/vendor/** binary
+target/a53x/patches/*/vendor/** binary
 target/a71/patches/*/*/** binary
 target/a73xq/patches/wpss/vendor/firmware/** binary
 target/*/patches/china/vendor/firmware/** binary
