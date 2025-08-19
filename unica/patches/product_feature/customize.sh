@@ -96,8 +96,9 @@ if [[ "$SOURCE_AUTO_BRIGHTNESS_TYPE" != "$TARGET_AUTO_BRIGHTNESS_TYPE" ]]; then
     LOG_STEP_OUT
 fi
 
-LOG_STEP_IN "- Applying fingerprint sensor patches"
 if [[ "$(GET_FP_SENSOR_TYPE "$SOURCE_FP_SENSOR_CONFIG")" != "$(GET_FP_SENSOR_TYPE "$TARGET_FP_SENSOR_CONFIG")" ]]; then
+   LOG_STEP_IN "- Applying fingerprint sensor patches"
+
     DECODE_APK "system" "system/framework/framework.jar"
     DECODE_APK "system" "system/framework/services.jar"
     DECODE_APK "system" "system/priv-app/SecSettings/SecSettings.apk"
@@ -145,9 +146,22 @@ if [[ "$(GET_FP_SENSOR_TYPE "$SOURCE_FP_SENSOR_CONFIG")" != "$(GET_FP_SENSOR_TYP
         #APPLY_PATCH "system" "system/priv-app/BiometricSetting/BiometricSetting.apk" \
             #"$SRC_DIR/unica/patches/product_feature/fingerprint/BiometricSetting.apk/0001-Enable-FP_FEATURE_NO_DELAY_IN_SCREEN_OFF.patch"
     #fi
+    LOG_STEP_OUT
 fi
-APPLY_PATCH "system" "system/priv-app/BiometricSetting/BiometricSetting.apk" "$SRC_DIR/unica/patches/product_feature/fingerprint/BiometricSetting.apk/0002-Always-use-ultrasonic-FOD-animation.patch"
-LOG_STEP_OUT
+
+if [[ "$(GET_FP_SENSOR_TYPE "$TARGET_FP_SENSOR_CONFIG")" == "optical" ]]; then
+    LOG "- Adding Ultrasonic FOD Animation"
+
+    DECODE_APK "system" "system/priv-app/BiometricSetting/BiometricSetting.apk"
+
+    FTP="
+    system/priv-app/BiometricSetting/BiometricSetting.apk/smali/com/samsung/android/biometrics/app/setting/fingerprint/vi/VisualEffectContainer.smali
+    "
+    for f in $FTP; do
+        sed -i "s/green_circle/ripple/g" "$APKTOOL_DIR/$f"
+        sed -i "s/white_circle/ripple/g" "$APKTOOL_DIR/$f"
+    done
+fi
 
 #if [[ "$TARGET_API_LEVEL" -lt 34 ]]; then
 #    echo "Applying Face HIDL patches"
