@@ -32,7 +32,6 @@ etc/dpolicy
 SYSTEM_DEBLOAT+="
 system/bin/ssud
 system/etc/init/ssu_dm1qxxx.rc
-system/etc/init/ssu_r11sxxx.rc
 system/etc/init/ssu.rc
 system/etc/permissions/privapp-permissions-com.samsung.ssu.xml
 system/etc/sysconfig/samsungsimunlock.xml
@@ -40,6 +39,18 @@ system/lib64/android.security.securekeygeneration-ndk.so
 system/lib64/libssu_keystore2.so
 system/priv-app/SsuService
 "
+
+if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" = "essi" ]]; then
+    SYSTEM_DEBLOAT+="
+    system/etc/init/ssu_r11sxxx.rc
+    "
+fi
+
+if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" = "qssi" ]]; then
+    SYSTEM_DEBLOAT+="
+    system/etc/init/ssu_dm1qxxx.rc
+    "
+fi
 
 # Recovery restoration script
 VENDOR_DEBLOAT+="
@@ -64,12 +75,10 @@ priv-app/SearchSelector
 
 SYSTEM_DEBLOAT+="
 system/app/DRParser
-system/app/DictDiotekForSec
 system/app/KidsHome_Installer
 system/app/FBAppManager_NS
 system/app/MoccaMobile
 system/app/PlayAutoInstallConfig
-system/app/SamsungCalendar
 system/app/SamsungPassAutofill_v1
 system/app/SamsungTTSVoice_de_DE_f00
 system/app/SamsungTTSVoice_en_GB_f00
@@ -86,7 +95,6 @@ system/app/SamsungTTSVoice_ru_RU_f00
 system/app/SamsungTTSVoice_th_TH_f00
 system/app/SamsungTTSVoice_vi_VN_f00
 system/app/SilentLog
-system/app/SmartReminder
 system/etc/init/samsung_pass_authenticator_service.rc
 system/etc/permissions/privapp-permissions-com.microsoft.skydrive.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.authfw.xml
@@ -94,7 +102,6 @@ system/etc/permissions/privapp-permissions-com.samsung.android.carkey.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.cidmanager.xml
 system/etc/permissions/privapp-permissions-com.sec.android.app.dexonpc.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.dkey.xml
-system/etc/permissions/privapp-permissions-com.samsung.android.game.gamehome.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.providers.factory.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.samsungpass.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.spayfw.xml
@@ -127,7 +134,6 @@ system/priv-app/FBInstaller_NS
 system/priv-app/FBServices
 system/priv-app/FactoryTestProvider
 system/priv-app/FotaAgent
-system/priv-app/GameHome
 system/priv-app/OneDrive_Samsung_v3
 system/priv-app/OMCAgent5
 system/priv-app/PaymentFramework
@@ -137,6 +143,16 @@ system/priv-app/SamsungPass
 system/priv-app/YourPhone_P1_5
 system/priv-app/Upday
 "
+
+if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" = "qssi" ]]; then
+    SYSTEM_DEBLOAT+="
+    system/app/DictDiotekForSec
+    system/app/SamsungCalendar
+    system/app/SmartReminder
+    system/etc/permissions/privapp-permissions-com.samsung.android.game.gamehome.xml
+    system/priv-app/GameHome
+    " 
+fi
 
 # eSIM
 if $SOURCE_IS_ESIM_SUPPORTED; then
