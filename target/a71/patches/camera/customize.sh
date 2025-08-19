@@ -1,11 +1,13 @@
-DELETE_FROM_WORK_DIR "system" "system/cameradata/portrait_data"
+LOG_STEP_IN "- Adding a52qnsxx portrait data"
 ADD_TO_WORK_DIR "a52qnsxx" "system" "system/cameradata/portrait_data" 0 0 755 "u:object_r:system_file:s0"
+LOG_STEP_OUT
 
 if ! grep -q "Camera End" "$WORK_DIR/vendor/ueventd.rc"; then
     echo "" >> "$WORK_DIR/vendor/ueventd.rc"
     cat "$SRC_DIR/target/a71/patches/camera/ueventd" >> "$WORK_DIR/vendor/ueventd.rc"
 fi
 
+LOG_STEP_IN "- Replacing camera blobs"
 BLOBS_LIST="
 system/lib/FrcMcWrapper.so
 system/lib/libFrucPSVTLib.so
@@ -77,7 +79,6 @@ do
     DELETE_FROM_WORK_DIR "system" "$blob"
 done
 
-LOG_STEP_IN "- Add stock camera libs"
 BLOBS_LIST="
 system/lib64/libFace_Landmark_Engine.camera.samsung.so
 system/lib64/libFaceRestoration.camera.samsung.so
@@ -102,7 +103,7 @@ do
 done
 LOG_STEP_OUT
 
-LOG_STEP_IN "- Fix AI Photo Editor"
+LOG_STEP_IN "- Fixing AI Photo Editor"
 cp -a --preserve=all \
     "$SRC_DIR/prebuilts/samsung/a52qnsxx/system/cameradata/portrait_data/single_bokeh_feature.json" \
     "$WORK_DIR/system/system/cameradata/portrait_data/unica_bokeh_feature.json"

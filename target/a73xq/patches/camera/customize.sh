@@ -1,3 +1,4 @@
+LOG_STEP_IN "- Replacing camera blobs"
 BLOBS_LIST="
 system/lib/FrcMcWrapper.so
 system/lib/libFrucPSVTLib.so
@@ -5,7 +6,6 @@ system/lib/libSemanticMap_v1.camera.samsung.so
 system/lib/libSlowShutter-core.so
 system/lib/libaifrc.aidl.quram.so
 system/lib/libaifrcInterface.camera.samsung.so
-system/lib/libgpuss_wrapper.so
 system/lib/libmcaimegpu.samsung.so
 system/lib/vendor.samsung.hardware.frcmc-V1-ndk.so
 system/lib64/FrcMcWrapper.so
@@ -15,7 +15,6 @@ system/lib64/libAIQSolution_MPISingleRGB40.camera.samsung.so
 system/lib64/libBestPhoto.camera.samsung.so
 system/lib64/libDeepDocRectify.camera.samsung.so
 system/lib64/libDocDeblur.camera.samsung.so
-system/lib64/libDocDeblur.enhanceX.samsung.so
 system/lib64/libDocObjectRemoval.camera.samsung.so
 system/lib64/libDocObjectRemoval.enhanceX.samsung.so
 system/lib64/libDocShadowRemoval.arcsoft.so
@@ -68,7 +67,6 @@ do
     DELETE_FROM_WORK_DIR "system" "$blob"
 done
 
-echo "Add stock camera libs"
 BLOBS_LIST="
 system/etc/public.libraries-camera.samsung.txt
 system/lib/libSlowShutter_jni.media.samsung.so
@@ -97,6 +95,7 @@ done
 {
     echo "libLttEngine.camera.samsung.so"
 } >> "$WORK_DIR/system/system/etc/public.libraries-camera.samsung.txt"
+LOG_STEP_OUT
 
 LOG_STEP_IN "- Fixing MIDAS model detection"
 sed -i "s/ro.product.device/ro.product.vendor.device/g" "$WORK_DIR/vendor/etc/midas/midas_config.json"

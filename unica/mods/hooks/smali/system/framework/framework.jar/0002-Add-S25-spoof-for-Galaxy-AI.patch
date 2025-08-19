@@ -1,0 +1,110 @@
+From defb232aef2308b283b365c84ecb1fba735e4a1c Mon Sep 17 00:00:00 2001
+From: utkustnr <utkuustuner@proton.me>
+Date: Sun, 27 Apr 2025 18:52:07 +0300
+Subject: Add S25 spoof for Galaxy AI
+
+Signed-off-by: utkustnr <utkuustuner@proton.me>
+---
+ .../io/mesalabs/unica/SamsungPropsHooks.smali | 61 ++++++++++++++++++-
+ 1 file changed, 60 insertions(+), 1 deletion(-)
+
+diff --git a/smali_classes6/io/mesalabs/unica/SamsungPropsHooks.smali b/smali_classes6/io/mesalabs/unica/SamsungPropsHooks.smali
+index 9703a41a..cbf8744d 100644
+--- a/smali_classes6/io/mesalabs/unica/SamsungPropsHooks.smali
++++ b/smali_classes6/io/mesalabs/unica/SamsungPropsHooks.smali
+@@ -20,6 +20,10 @@
+ 
+ .field private static final SAMSUNG_TV_PLUS_PACKAGE_NAME:Ljava/lang/String; = "com.samsung.android.tvplus"
+ 
++.field private static final PACKAGE_AI_LANG:Ljava/lang/String; = "com.samsung.android.intellivoiceservice"
++
++.field private static final PACKAGE_GALAXY_STORE:Ljava/lang/String; = "com.sec.android.app.samsungapps"
++
+ .field private static final SMART_VIEW_PACKAGE_NAME:Ljava/lang/String; = "com.samsung.android.smartmirroring"
+ 
+ .field private static final TAG:Ljava/lang/String; = "SamsungPropsHooks"
+@@ -139,6 +143,22 @@
+     sput-boolean v2, Lio/mesalabs/unica/SamsungPropsHooks;->sIsUserApp:Z
+ 
+     :goto_1
++    const-string v3, "com.samsung.android.intellivoiceservice"
++
++    invoke-virtual {v0, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v3
++
++    if-nez v3, :cond_7
++
++    const-string v3, "com.sec.android.app.samsungapps"
++
++    invoke-virtual {v0, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v3
++
++    if-nez v3, :cond_7
++
+     const-string v3, "com.samsung.android.rampart"
+ 
+     invoke-virtual {v0, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+@@ -247,7 +267,7 @@
+ 
+     const-string v1, "ro.boot.em.model"
+ 
+-    const-string v2, "SM-G990B2"
++    const-string v2, "SM-A736B"
+ 
+     invoke-static {v1, v2}, Landroid/os/SystemProperties;->get(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+ 
+@@ -260,6 +280,11 @@
+     :cond_6
+     :goto_4
+     return-void
++
++    :cond_7
++    invoke-static {}, Lio/mesalabs/unica/SamsungPropsHooks;->spoofAsS25()V
++
++    return-void
+ .end method
+ 
+ .method public static onEDMGetAPILevelHook()I
+@@ -492,3 +517,37 @@
+     :goto_0
+     return-void
+ .end method
++
++.method private static spoofAsS25()V
++    .locals 2
++
++    const-string v0, "BRAND"
++
++    const-string v1, "samsung"
++
++    invoke-static {v0, v1}, Lio/mesalabs/unica/SamsungPropsHooks;->setBuildField(Ljava/lang/String;Ljava/lang/String;)V
++
++    const-string v0, "MANUFACTURER"
++
++    const-string v1, "samsung"
++
++    invoke-static {v0, v1}, Lio/mesalabs/unica/SamsungPropsHooks;->setBuildField(Ljava/lang/String;Ljava/lang/String;)V
++
++    const-string v0, "DEVICE"
++
++    const-string v1, "pa1q"
++
++    invoke-static {v0, v1}, Lio/mesalabs/unica/SamsungPropsHooks;->setBuildField(Ljava/lang/String;Ljava/lang/String;)V
++
++    const-string v0, "PRODUCT"
++
++    invoke-static {v0, v1}, Lio/mesalabs/unica/SamsungPropsHooks;->setBuildField(Ljava/lang/String;Ljava/lang/String;)V
++
++    const-string v0, "MODEL"
++
++    const-string v1, "SM-S931B"
++
++    invoke-static {v0, v1}, Lio/mesalabs/unica/SamsungPropsHooks;->setBuildField(Ljava/lang/String;Ljava/lang/String;)V
++
++    return-void
++.end method
+-- 
+2.50.1
+

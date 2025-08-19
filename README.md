@@ -2,31 +2,39 @@
   <img loading="lazy" src="readme-res/banner.png"/>
 </h1>
 <p align="center">
-  <a href="https://github.com/Yagzie/ProjectNERV/blob/fifteen/LICENSE"><img loading="lazy" src="https://img.shields.io/github/license/salvogiangri/UN1CA?style=for-the-badge&logo=github"/></a>
-  <a href="https://github.com/Yagzie/ProjectNERV/commits/fifteen"><img loading="lazy" src="https://img.shields.io/github/last-commit/salvogiangri/UN1CA/fifteen?style=for-the-badge"/></a>
-  <a href="https://github.com/Yagzie/ProjectNERV/stargazers"><img loading="lazy" src="https://img.shields.io/github/stars/salvogiangri/UN1CA?style=for-the-badge"/></a>
-  <a href="https://github.com/Yagzie/ProjectNERV/graphs/contributors"><img loading="lazy" src="https://img.shields.io/github/contributors/salvogiangri/UN1CA?style=for-the-badge"/></a>
-  <a href="https://github.com/Yagzie/ProjectNERV/actions/workflows/build.yml"><img loading="lazy" src="https://img.shields.io/github/actions/workflow/status/salvogiangri/UN1CA/build.yml?style=for-the-badge"/></a>
-  <a href="https://crowdin.com/project/UN1CA"><img loading="lazy" src="https://img.shields.io/badge/Crowdin-263238?style=for-the-badge&logo=crowdin"/></a>
+  <a href="https://github.com/yagzie/NERV/blob/fifteen/LICENSE"><img loading="lazy" src="https://img.shields.io/github/license/yagzie/NERV?style=for-the-badge&logo=github"/></a>
+  <a href="https://github.com/yagzie/NERV/commits/fifteen"><img loading="lazy" src="https://img.shields.io/github/last-commit/yagzie/NERV/fifteen?style=for-the-badge"/></a>
+  <a href="https://github.com/yagzie/NERV/stargazers"><img loading="lazy" src="https://img.shields.io/github/stars/yagzie/NERV?style=for-the-badge"/></a>
+  <a href="https://github.com/yagzie/NERV/graphs/contributors"><img loading="lazy" src="https://img.shields.io/github/contributors/yagzie/NERV?style=for-the-badge"/></a>
+  <a href="https://github.com/yagzie/NERV/actions/workflows/build.yml"><img loading="lazy" src="https://img.shields.io/github/actions/workflow/status/yagzie/NERV/build.yml?style=for-the-badge"/></a>
 </p>
 <p align="center">UN1CA <i>(/ˈu.ni.ka/)</i> is a work-in-progress custom firmware for Samsung Galaxy devices.</p>
 
 <p align="center">
-  <a href="https://github.com/salvogiangri/UN1CA/discussions">🚀 Discussions</a>
-  •
-  <a href="https://t.me/unicarom">💬 Telegram</a>
+  <a href="https://t.me/unicarom">💬 UN1CA Telegram</a>
+</p>
+
+<p align="center">
+  <a href="https://t.me/groupzie">💬 NERV Telegram</a>
 </p>
 
 # What is UN1CA?
 UN1CA is a work-in-progress custom firmware for Samsung Galaxy devices. It's based on the latest and greatest iteration of Samsung's UX and it also includes additional features and tweaks to ensure the best possible experience out of the box.
-Its build system allows to automatically download/extract the firmware, apply the required patches and generates a flashable zip/tar package for the specified device.
+Its build system allows to automatically download/extract the firmware, apply the required patches and generates a flashable zip package for the specified device.
 
 Any form of contribution, suggestions, bug report or feature request for the project will be welcome.
+
+# What is NERV?
+NERV is a fork of UN1CA; to make the build system work with One UI 7, we are aiming for an UN1CA-like experience with what we can do. All changes have been made under GPLv3, if you see any problems about credits at repo, please kindly report to me at Telegram, XDA or email. 
 
 # Features
 - Based on the latest stable Galaxy S23 (Paradigm) / A73 5G (Fun) Firmware
 - Galaxy AI support
+- App Lock Support
 - High end animations
+- Screenshots from Secure Apps support
+- ASKS disabled 
+- APK Downgrade support
 - Native/live blur support (Paradigm)
 - AOD clock transition support
 - Adaptive refresh rate support (Paradigm)
@@ -35,7 +43,7 @@ Any form of contribution, suggestions, bug report or feature request for the pro
 - Object, shadow and reflection eraser support
 - Image clipper support
 - Smart Suggestions widget
-- Samsung Now Brief support (Fun)
+- Samsung Now Brief support
 - Multi user support
 - Samsung DeX support (Paradigm)
 - Camera privacy toggle support
@@ -61,7 +69,9 @@ A big thanks goes to the following for their invaluable contributions in no part
 - **[ananjaser1211](https://github.com/ananjaser1211)** for troubleshooting and his time
 - **[iDrinkCoffee](https://github.com/iDrinkCoffee-TG)** and **[RisenID](https://github.com/RisenID)** for documentation revisioning
 - **[LineageOS Team](https://www.lineageos.org/)** for their original [OTA updater implementation](https://github.com/LineageOS/android_packages_apps_Updater)
+- **[All Kangers]** for making me laugh with your rebranded repos with no difference
+- **[Bobert10](https://t.me/bobert10)** for the NERV banner
 - *All the UN1CA project contributors and testers ❤️*
 
 # Stargazers over time
-[![Stargazers over time](https://starchart.cc/salvogiangri/UN1CA.svg)](https://starchart.cc/salvogiangri/UN1CA)
+[![Stargazers over time](https://starchart.cc/yagzie/NERV.svg)](https://starchart.cc/yagzie/NERV)

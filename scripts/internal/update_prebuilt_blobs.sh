@@ -20,6 +20,9 @@
 
 set -Ee
 
+source "$SRC_DIR/scripts/utils/module_utils.sh" || exit 1
+source "$SRC_DIR/scripts/utils/log_utils.sh" || exit 1
+
 # [
 GET_LATEST_FIRMWARE()
 {
@@ -28,14 +31,13 @@ GET_LATEST_FIRMWARE()
 }
 #]
 
-if [ "$#" != 1 ]; then
-    echo "Usage: update_prebuilt_blobs <path>"
+if [[ "$#" != 1 ]]; then
+    LOG "Usage: update_prebuilt_blobs <path>"
     exit 1
 fi
 
-if [ ! -d "$SRC_DIR/$1" ]; then
-    echo "Folder not found: $SRC_DIR/$1"
-    exit 1
+if [[ ! -d "$SRC_DIR/$1" ]]; then
+    ABORT "Folder not found: \"$SRC_DIR/$1\""
 fi
 
 MODULE="$SRC_DIR/$1"
@@ -117,20 +119,18 @@ esac
 MODEL=$(echo -n "$FIRMWARE" | cut -d "/" -f 1)
 REGION=$(echo -n "$FIRMWARE" | cut -d "/" -f 2)
 
-[ -z "$(GET_LATEST_FIRMWARE)" ] && exit 1
-if [[ "$(GET_LATEST_FIRMWARE)" == "$(cat "$MODULE/.current")" ]]; then
-    echo "Nothing to do."
-    exit 0
+[[ -z "$(GET_LATEST_FIRMWARE)" ]] && exit 1
+if [[ -f "$MODULE/.current" ]]; then
+    if [[ "$(GET_LATEST_FIRMWARE)" == "$(cat "$MODULE/.current")" ]]; then
+        LOG "- Nothing to do."
+        exit 0
+    fi
 fi
 
-echo -e "Updating $MODULE blobs\n"
+LOG_STEP_IN "- Updating $MODULE blobs"
 
-export SOURCE_FIRMWARE="$FIRMWARE"
-export TARGET_FIRMWARE="$FIRMWARE"
-export SOURCE_EXTRA_FIRMWARES=""
-export TARGET_EXTRA_FIRMWARES=""
-"$SRC_DIR/scripts/download_fw.sh"
-"$SRC_DIR/scripts/extract_fw.sh"
+bash "$SRC_DIR/scripts/download_fw.sh" --ignore-target --ignore-source "$FIRMWARE"
+bash "$SRC_DIR/scripts/extract_fw.sh" --ignore-target --ignore-source "$FIRMWARE"
 
 for i in $BLOBS; do
     if [[ "$i" == *[0-9] ]]; then
@@ -142,12 +142,14 @@ for i in $BLOBS; do
 
     if [[ "$(wc -c "$FW_DIR/${MODEL}_${REGION}/$i" | cut -d " " -f 1)" -gt "52428800" ]]; then
         rm "$OUT."*
-        split -d -b 52428800 "$FW_DIR/${MODEL}_${REGION}/$i" "$OUT."
+        EVAL "split -d -b 52428800 \"$FW_DIR/${MODEL}_${REGION}/$i\" \"$OUT.\""
     else
-        cp -a "$FW_DIR/${MODEL}_${REGION}/$i" "$OUT"
+        cp -fa "$FW_DIR/${MODEL}_${REGION}/$i" "$OUT"
     fi
 done
 
-cp -a "$FW_DIR/${MODEL}_${REGION}/.extracted" "$MODULE/.current"
+cp -fa "$FW_DIR/${MODEL}_${REGION}/.extracted" "$MODULE/.current"
+
+LOG_STEP_OUT
 
 exit 0
