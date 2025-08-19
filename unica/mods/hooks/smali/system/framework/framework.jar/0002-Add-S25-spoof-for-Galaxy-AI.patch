@@ -1,7 +1,7 @@
 From defb232aef2308b283b365c84ecb1fba735e4a1c Mon Sep 17 00:00:00 2001
 From: utkustnr <utkuustuner@proton.me>
 Date: Sun, 27 Apr 2025 18:52:07 +0300
-Subject: Add S25 spoof for Galaxy AI
+Subject: [PATCH] Add S25 spoof for Galaxy AI
 
 Signed-off-by: utkustnr <utkuustuner@proton.me>
 ---
