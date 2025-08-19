@@ -14,6 +14,7 @@ LOG_STEP_IN "- Adding stock rscmgr.rc"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/etc/init/rscmgr.rc" 0 0 644 "u:object_r:system_file:s0"
 LOG_STEP_OUT
 
+LOG_STEP_IN "- Adding stock system features"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.cover.clearcameraviewcover.xml"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.cover.flip.xml"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.cover.sview.xml"
@@ -22,13 +23,12 @@ DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.nfc_authen
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.pocketsensitivitymode_level1.xml"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.sensorhub_level29.xml"
 DELETE_FROM_WORK_DIR "system" "system/etc/permissions/com.sec.feature.wirelesscharger_authentication.xml"
-LOG_STEP_IN "- Adding stock system features"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/etc/permissions/com.sec.feature.sensorhub_level40.xml" 0 0 644 "u:object_r:system_file:s0"
 LOG_STEP_OUT
 
+LOG_STEP_IN "- Adding stock WFD blobs"
 DELETE_FROM_WORK_DIR "system" "system/lib64/libhdcp_client_aidl.so"
 DELETE_FROM_WORK_DIR "system" "system/lib64/vendor.samsung.hardware.security.hdcp.wifidisplay-V2-ndk.so"
-LOG_STEP_IN "- Adding stock WFD blobs"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/bin/insthk" 0 2000 755 "u:object_r:insthk_exec:s0"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/bin/remotedisplay" 0 2000 755 "u:object_r:remotedisplay_exec:s0"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib64/libhdcp2.so" 0 0 644 "u:object_r:system_lib_file:s0"
@@ -52,6 +52,7 @@ ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib64/vendor.samsung.hardwar
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib64/vendor.samsung.hardware.biometrics.face@3.0.so" 0 0 644 "u:object_r:system_lib_file:s0"
 LOG_STEP_OUT
 
+LOG_STEP_IN "- Adding stock keymaster libs"
 DELETE_FROM_WORK_DIR "system" "system/lib/android.hardware.security.keymint-V2-ndk.so"
 DELETE_FROM_WORK_DIR "system" "system/lib/android.hardware.security.secureclock-V1-ndk.so"
 DELETE_FROM_WORK_DIR "system" "system/lib/libdk_native_keymint.so"
@@ -59,7 +60,6 @@ DELETE_FROM_WORK_DIR "system" "system/lib/vendor.samsung.hardware.keymint-V2-ndk
 DELETE_FROM_WORK_DIR "system" "system/lib64/android.hardware.security.keymint-V2-ndk.so"
 DELETE_FROM_WORK_DIR "system" "system/lib64/libdk_native_keymint.so"
 DELETE_FROM_WORK_DIR "system" "system/lib64/vendor.samsung.hardware.keymint-V2-ndk.so"
-LOG_STEP_IN "- Adding stock keymaster libs"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib/android.hardware.keymaster@3.0.so" 0 0 644 "u:object_r:system_lib_file:s0"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib/android.hardware.keymaster@4.0.so" 0 0 644 "u:object_r:system_lib_file:s0"
 ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "system" "system/lib/android.hardware.keymaster@4.1.so" 0 0 644 "u:object_r:system_lib_file:s0"

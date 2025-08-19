@@ -12,7 +12,7 @@ sed -i \
     "$WORK_DIR/vendor/default.prop"
 LOG_STEP_OUT
 
-LOG_STEP_IN "Adding erofs to fstab"
+LOG_STEP_IN "- Adding erofs to fstab"
 sed -i \
   -e '/^system[[:space:]]\+\/system[[:space:]]\+\(erofs\|f2fs\)/d' \
   -e '/^\(system[[:space:]]\+\/system[[:space:]]\+\)ext4\([[:space:]].*\)$/s//\1ext4\2\n\1erofs\2\n\1f2fs\2/' \
