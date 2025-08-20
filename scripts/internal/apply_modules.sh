@@ -58,13 +58,13 @@ APPLY_MODULE()
 
     READ_AND_APPLY_PROPS "$MODPATH"
 
-    [ -f "$MODPATH/customize.sh" ] && . "$MODPATH/customize.sh"
-
     if [ -d "$MODPATH/smali" ]; then
         while IFS= read -r f; do
             APPLY_SMALI_PATCHES "$MODPATH/smali" "$f"
         done < <(find "$MODPATH/smali" -type d \( -name "*.apk" -o -name "*.jar" \) | sed "s|$MODPATH/smali/||")
     fi
+
+    [ -f "$MODPATH/customize.sh" ] && . "$MODPATH/customize.sh"
 
     LOG_STEP_OUT
 

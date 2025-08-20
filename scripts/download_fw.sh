@@ -165,18 +165,31 @@ for i in "${FIRMWARES[@]}"; do
     LOG "- Downloading firmware..."
     [ -f "$ODIN_DIR/${MODEL}_${CSC}/.downloaded" ] && rm -rf "$ODIN_DIR/${MODEL}_${CSC}"
     mkdir -p "$ODIN_DIR/${MODEL}_${CSC}"
-    # shellcheck disable=SC2164
-    # Anan's samloader stores its logs in the current working directory, let's move into OUT_DIR just for this time
-    (
-    cd "$OUT_DIR"
-    samloader -m "$MODEL" -r "$CSC" -i "$IMEI" -s "$SERIAL_NO" download -O "$ODIN_DIR/${MODEL}_${CSC}" 1> /dev/null || exit 1
-    )
 
-    ZIP_FILE="$(find "$ODIN_DIR/${MODEL}_${CSC}" -name "*.zip" | sort -r | head -n 1)"
-    if [ ! "$ZIP_FILE" ] || [ ! -f "$ZIP_FILE" ]; then
-        LOG "\033[0;31m! Download failed\033[0m"
-        exit 1
-    fi
+    COUNT=1
+    # Loop infinetely until download succeeds
+    while true; do
+        # shellcheck disable=SC2164
+        # Anan's samloader stores its logs in the current working directory, let's move into OUT_DIR just for this time
+        (
+        cd "$OUT_DIR"
+        samloader -m "$MODEL" -r "$CSC" -i "$IMEI" -s "$SERIAL_NO" download -O "$ODIN_DIR/${MODEL}_${CSC}" 1> /dev/null || exit 1
+        )
+
+        ZIP_FILE="$(find "$ODIN_DIR/${MODEL}_${CSC}" -name "*.zip" | sort -r | head -n 1)"
+        if [ ! "$ZIP_FILE" ] || [ ! -f "$ZIP_FILE" ]; then
+            if [ $COUNT -gt 10 ]; then
+                LOGW "\033[0;31m! Download failed, check your network connection or device IMEI!\033[0m"
+                exit 1
+            fi
+
+            LOGW "\033[0;31m! [Attempt: $COUNT] Download failed, retrying in 5 seconds...\033[0m"
+            sleep 5
+            ((COUNT++))
+        else
+            break
+        fi
+    done
 
     LOG "- Extracting $(basename "$ZIP_FILE")..."
     EVAL "unzip -o \"$ZIP_FILE\" -d \"$ODIN_DIR/${MODEL}_${CSC}\" && rm -rf \"$ZIP_FILE\"" || exit 1

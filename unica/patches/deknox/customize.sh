@@ -96,7 +96,6 @@ if [[ "$TARGET_API_LEVEL" -ge 34 ]]; then
     DELETE_FROM_WORK_DIR "system" "system/etc/permissions/FabricCryptoLib.xml"
     DELETE_FROM_WORK_DIR "system" "system/etc/init/fabric_crypto.rc"
     DELETE_FROM_WORK_DIR "system" "system/etc/permissions/privapp-permissions-com.samsung.android.kmxservice.xml"
-    DELETE_FROM_WORK_DIR "system" "system/etc/permissions/privapp-permissions-com.sem.factoryapp.xml"
     DELETE_FROM_WORK_DIR "system" "system/lib64/vendor.samsung.hardware.security.fkeymaster-V1-cpp.so"
     DELETE_FROM_WORK_DIR "system" "system/lib64/vendor.samsung.hardware.security.fkeymaster-V1-ndk.so"
     DELETE_FROM_WORK_DIR "system" "system/lib64/com.samsung.security.fabric.cryptod-V1-cpp.so"
