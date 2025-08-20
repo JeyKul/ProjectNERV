@@ -1,3 +1,11 @@
+MODEL=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 1)
+REGION=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 2)
+
+if ! grep -q "Camera End" "$WORK_DIR/vendor/ueventd.rc"; then
+    echo -e "\n" >> "$WORK_DIR/vendor/ueventd.rc"
+    cat "$SRC_DIR/target/gts7xlwifi/patches/camera/ueventd" >> "$WORK_DIR/vendor/ueventd.rc"
+fi
+
 BLOBS_LIST="
 system/lib/libFrucPSVTLib.so
 system/lib/libSemanticMap_v1.camera.samsung.so
