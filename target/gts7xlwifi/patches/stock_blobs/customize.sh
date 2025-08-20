@@ -40,11 +40,6 @@ ADD_TO_WORK_DIR "a52qnsxx" "system" "system/lib/libstagefright_hdcp.so" 0 0 644 
 ADD_TO_WORK_DIR "a52qnsxx" "vendor" "bin/hw/wpa_supplicant" 0 2000 755 "u:object_r:hal_wifi_supplicant_default_exec:s0"
 LOG_STEP_OUT
 
-DELETE_FROM_WORK_DIR "product" "overlay/framework-res__gts9pwifixx__auto_generated_rro_product.apk"
-LOG_STEP_IN "- adding stock brightness levels"
-ADD_TO_WORK_DIR "$TARGET_FIRMWARE" "product" "overlay/framework-res__auto_generated_rro_product.apk" 0 0 644 "u:object_r:system_file:s0"
-LOG_STEP_OUT
-
 LOG_STEP_IN "- Fix face unlock"
 DELETE_FROM_WORK_DIR "vendor" "bin/hw/vendor.samsung.hardware.biometrics.face@2.0-service"
 DELETE_FROM_WORK_DIR "vendor" "etc/init/vendor.samsung.hardware.biometrics.face@2.0-service.rc"
@@ -55,4 +50,3 @@ ADD_TO_WORK_DIR "a73xqxx" "vendor" "lib/vendor.samsung.hardware.biometrics.face@
 ADD_TO_WORK_DIR "a73xqxx" "vendor" "lib64/vendor.samsung.hardware.biometrics.face@2.0.so"
 ADD_TO_WORK_DIR "a73xqxx" "vendor" "lib64/vendor.samsung.hardware.biometrics.face@3.0.so"
 LOG_STEP_OUT
-
