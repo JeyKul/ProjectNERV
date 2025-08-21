@@ -1,0 +1,912 @@
+diff --git a/smali_classes2/com/samsung/android/displayquality/SemDisplayQuality.smali b/smali_classes2/com/samsung/android/displayquality/SemDisplayQuality.smali
+index e490643..62d2227 100644
+--- a/smali_classes2/com/samsung/android/displayquality/SemDisplayQuality.smali
++++ b/smali_classes2/com/samsung/android/displayquality/SemDisplayQuality.smali
+@@ -4,692 +4,39 @@
+ 
+ 
+ # static fields
+-.field private static final DISPLAY_COLOR_MANAGED:I = 0x0
+-
+-.field private static final DISPLAY_COLOR_MODE_RGB:I = 0x7
+-
+-.field private static final DISPLAY_COLOR_UNMANAGED:I = 0x1
+-
+-.field private static final INDOOR_MODE:I = -0x1
+-
+-.field private static final OUTDOOR1_LUX:I = 0x1388
+-
+-.field private static final OUTDOOR1_MODE:I = 0x119
+-
+-.field private static final OUTDOOR2_LUX:I = 0x2710
+-
+-.field private static final OUTDOOR2_MODE:I = 0x11a
+-
+-.field private static final OUTDOOR3_LUX:I = 0xc350
+-
+-.field private static final OUTDOOR3_MODE:I = 0x11b
+-
+-.field private static final SCREEN_MODE_ADAPTIVE:I = 0x4
+-
+-.field private static final SCREEN_MODE_AMOLED_CINEMA:I = 0x0
+-
+-.field private static final SCREEN_MODE_AMOLED_PHOTO:I = 0x1
+-
+-.field private static final SCREEN_MODE_BASIC:I = 0x2
+-
+-.field private static final SCREEN_MODE_NATURAL:I = 0x3
+-
+-.field private static final SCREEN_MODE_READING:I = 0x5
+-
+-.field private static final SURFACE_FLINGER_TRANSACTION_ADAPTIVE_SYNC_EN:I = 0x4e23
+-
+-.field private static final SURFACE_FLINGER_TRANSACTION_SET_NATIVE_MODE:I = 0x3ff
+-
+-.field private static final TAG:Ljava/lang/String; = "SemDisplayQualityQct"
+-
+-.field private static final mSupportDPDebug:Z
+-
+-.field private static final mSupportDpBackOff:Z
+-
+-.field private static final mSupportDpRatio:Z
+-
+-.field private static final mSupportHal:Z
+-
+-.field private static final mSupportLtm:Z
+-
+-.field private static final mSupportSvi:Z
+-
+-
+-# instance fields
+-.field private dpHelper:Lcom/samsung/android/displayport/DisplayportHelper;
+-
+-.field private mHalClient:Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;
+-
+-.field private mOutdoorMode:I
+-
+-.field private mSettingScreenMode:I
++.field private static final TAG:Ljava/lang/String; = "SemDisplayQualityDummy"
+ 
+ 
+ # direct methods
+-.method public static synthetic $r8$lambda$CC9yal3wlJNxeI_oUsgtBOs1pKc(Lcom/samsung/android/displayquality/SemDisplayQuality;)V
+-    .locals 0
+-
+-    invoke-direct {p0}, Lcom/samsung/android/displayquality/SemDisplayQuality;->lambda$new$0()V
+-
+-    return-void
+-.end method
+-
+-.method static constructor <clinit>()V
+-    .locals 1
+-
+-    sget-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQualityFeature;->LTM_SUPPORT:Z
+-
+-    sput-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportLtm:Z
+-
+-    sget-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQualityFeature;->SVI_SUPPORT:Z
+-
+-    sput-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportSvi:Z
+-
+-    sget-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQualityFeature;->HAL_SUPPORT:Z
+-
+-    sput-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportHal:Z
+-
+-    sget-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQualityFeature;->DP_RATIO_SUPPORT:Z
+-
+-    sput-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportDpRatio:Z
+-
+-    sget-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQualityFeature;->DP_DEBUG_SUPPORT:Z
+-
+-    sput-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportDPDebug:Z
+-
+-    sget-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQualityFeature;->DP_BACKOFF_SUPPORT:Z
+-
+-    sput-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportDpBackOff:Z
+-
+-    return-void
+-.end method
+-
+ .method public constructor <init>(Landroid/content/Context;)V
+-    .locals 3
+-
+-    invoke-direct {p0, p1}, Lcom/samsung/android/displayquality/SemDisplayQualityAP;-><init>(Landroid/content/Context;)V
+-
+-    const/4 v0, -0x1
+-
+-    iput v0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mOutdoorMode:I
+-
+-    const/4 v0, 0x0
+-
+-    iput-object v0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mHalClient:Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;
+-
+-    iput-object v0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->dpHelper:Lcom/samsung/android/displayport/DisplayportHelper;
+-
+-    sget-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportHal:Z
+-
+-    if-eqz v0, :cond_1
+-
+-    sget-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportLtm:Z
+-
+-    if-nez v0, :cond_0
+-
+-    sget-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportSvi:Z
+-
+-    if-eqz v0, :cond_1
+-
+-    :cond_0
+-    const-string v0, "DisplayQuality HAL support!"
+-
+-    const-string v1, "SemDisplayQualityQct"
+-
+-    invoke-static {v1, v0}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    new-instance v0, Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;
+-
+-    invoke-direct {v0}, Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;-><init>()V
+-
+-    iput-object v0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mHalClient:Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;
+-
+-    sget-object v0, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->SCREEN_BRIGHTNESS_MODE_URI:Landroid/net/Uri;
+-
+-    invoke-virtual {p0, v0}, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->startSettingObserver(Landroid/net/Uri;)V
+-
+-    new-instance v0, Ljava/lang/Thread;
+-
+-    new-instance v2, Lcom/samsung/android/displayquality/SemDisplayQuality$$ExternalSyntheticLambda0;
+-
+-    invoke-direct {v2, p0}, Lcom/samsung/android/displayquality/SemDisplayQuality$$ExternalSyntheticLambda0;-><init>(Lcom/samsung/android/displayquality/SemDisplayQuality;)V
+-
+-    invoke-direct {v0, v2}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;)V
+-
+-    invoke-virtual {v0}, Ljava/lang/Thread;->start()V
+-
+-    iget-boolean v0, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->DEBUG:Z
+-
+-    if-eqz v0, :cond_1
+-
+-    new-instance v0, Ljava/lang/StringBuilder;
+-
+-    const-string v2, "BrightnessModeAuto : "
+-
+-    invoke-direct {v0, v2}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+-
+-    iget-boolean v2, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->mIsBrightnessModeAuto:Z
+-
+-    invoke-static {v1, v0, v2}, Lcom/android/server/AnyMotionDetector$$ExternalSyntheticOutline0;->m(Ljava/lang/String;Ljava/lang/StringBuilder;Z)V
+-
+-    :cond_1
+-    sget-boolean v0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportDpRatio:Z
+-
+-    if-nez v0, :cond_2
+-
+-    sget-boolean v1, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportDPDebug:Z
+-
+-    if-nez v1, :cond_2
+-
+-    sget-boolean v1, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportDpBackOff:Z
+-
+-    if-eqz v1, :cond_5
+-
+-    :cond_2
+-    invoke-static {p1}, Lcom/samsung/android/displayport/DisplayportHelper;->getInstance(Landroid/content/Context;)Lcom/samsung/android/displayport/DisplayportHelper;
+-
+-    move-result-object p1
+-
+-    iput-object p1, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->dpHelper:Lcom/samsung/android/displayport/DisplayportHelper;
+-
+-    if-eqz p1, :cond_3
+-
+-    sget-boolean v1, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportDPDebug:Z
+-
+-    if-eqz v1, :cond_3
+-
+-    invoke-virtual {p1}, Lcom/samsung/android/displayport/DisplayportHelper;->startDPDebug()V
+-
+-    :cond_3
+-    iget-object p1, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->dpHelper:Lcom/samsung/android/displayport/DisplayportHelper;
+-
+-    if-eqz p1, :cond_4
+-
+-    if-eqz v0, :cond_4
+-
+-    invoke-virtual {p1}, Lcom/samsung/android/displayport/DisplayportHelper;->startDPRatioChanger()V
+-
+-    :cond_4
+-    iget-object p0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->dpHelper:Lcom/samsung/android/displayport/DisplayportHelper;
+-
+-    if-eqz p0, :cond_5
+-
+-    sget-boolean p1, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSupportDpBackOff:Z
+-
+-    if-eqz p1, :cond_5
+-
+-    invoke-virtual {p0}, Lcom/samsung/android/displayport/DisplayportHelper;->startDPBackOff()V
+-
+-    :cond_5
+-    return-void
+-.end method
+-
+-.method private checkBrightnessModeAndRunOutdoorVisibilityEnhancer()V
+-    .locals 4
+-
+-    iget-object v0, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->mBrightnessModeLock:Ljava/lang/Object;
+-
+-    monitor-enter v0
+-
+-    const/16 v1, 0xa
+-
+-    :goto_0
+-    :try_start_0
+-    iget-object v2, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->mContentResolver:Landroid/content/ContentResolver;
+-
+-    invoke-virtual {p0, v2}, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->isBrightnessModeAuto(Landroid/content/ContentResolver;)Z
+-
+-    move-result v2
+-
+-    iput-boolean v2, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->mIsBrightnessModeAuto:Z
+-
+-    iget-object v3, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mHalClient:Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;
+-
+-    invoke-virtual {v3, v2}, Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;->setOutdoorVisibilityEnhancerEnabled(Z)I
+-
+-    move-result v2
+-
+-    const/4 v3, 0x2
+-
+-    if-eq v2, v3, :cond_0
+-
+-    goto :goto_2
+-
+-    :cond_0
+-    const-string v2, "SemDisplayQualityQct"
+-
+-    const-string v3, "checkBrightnessModeAndRunOutdoorVisibilityEnhancer: setOutdoorVisibilityEnhancerEnabled failed"
+-
+-    invoke-static {v2, v3}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
+-    :try_end_0
+-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+-
+-    const-wide/16 v2, 0x3e8
+-
+-    :try_start_1
+-    invoke-static {v2, v3}, Ljava/lang/Thread;->sleep(J)V
+-    :try_end_1
+-    .catch Ljava/lang/InterruptedException; {:try_start_1 .. :try_end_1} :catch_0
+-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+-
+-    goto :goto_1
+-
+-    :catchall_0
+-    move-exception p0
+-
+-    goto :goto_3
+-
+-    :catch_0
+-    move-exception v2
+-
+-    :try_start_2
+-    invoke-virtual {v2}, Ljava/lang/InterruptedException;->printStackTrace()V
+-
+-    :goto_1
+-    add-int/lit8 v2, v1, -0x1
+-
+-    if-gtz v1, :cond_1
+-
+-    :goto_2
+-    monitor-exit v0
+-
+-    return-void
+-
+-    :cond_1
+-    move v1, v2
+-
+-    goto :goto_0
+-
+-    :goto_3
+-    monitor-exit v0
+-    :try_end_2
+-    .catchall {:try_start_2 .. :try_end_2} :catchall_0
+-
+-    throw p0
+-.end method
+-
+-.method private enableAdaptiveSync(Z)V
+-    .locals 5
+-
+-    const-string p0, "Failed to set AdaptiveSync: "
+-
+-    new-instance v0, Ljava/lang/StringBuilder;
+-
+-    const-string v1, "enableAdaptiveSync: "
+-
+-    invoke-direct {v0, v1}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+-
+-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object v0
+-
+-    const-string v1, "SemDisplayQualityQct"
+-
+-    invoke-static {v1, v0}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    const-string v0, "SurfaceFlinger"
+-
+-    invoke-static {v0}, Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder;
+-
+-    move-result-object v0
+-
+-    if-nez v0, :cond_0
+-
+-    const-string p0, "Failed to get service SurfaceFlinger"
+-
+-    invoke-static {v1, p0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    return-void
+-
+-    :cond_0
+-    invoke-static {}, Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+-
+-    move-result-object v2
+-
+-    const-string v3, "android.ui.ISurfaceComposer"
+-
+-    invoke-virtual {v2, v3}, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+-
+-    if-eqz p1, :cond_1
+-
+-    const/16 p1, 0x3e9
+-
+-    goto :goto_0
+-
+-    :cond_1
+-    const/16 p1, 0x3e8
+-
+-    :goto_0
+-    invoke-virtual {v2, p1}, Landroid/os/Parcel;->writeInt(I)V
+-
+-    const/4 p1, 0x0
+-
+-    const/4 v3, 0x0
+-
+-    const/16 v4, 0x4e23
+-
+-    :try_start_0
+-    invoke-interface {v0, v4, v2, p1, v3}, Landroid/os/IBinder;->transact(ILandroid/os/Parcel;Landroid/os/Parcel;I)Z
+-    :try_end_0
+-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+-
+-    :goto_1
+-    invoke-virtual {v2}, Landroid/os/Parcel;->recycle()V
+-
+-    goto :goto_2
+-
+-    :catchall_0
+-    move-exception p0
+-
+-    goto :goto_3
+-
+-    :catch_0
+-    move-exception p1
+-
+-    :try_start_1
+-    new-instance v0, Ljava/lang/StringBuilder;
+-
+-    invoke-direct {v0, p0}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+-
+-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object p0
+-
+-    invoke-static {v1, p0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;)I
+-    :try_end_1
+-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+-
+-    goto :goto_1
+-
+-    :goto_2
+-    return-void
+-
+-    :goto_3
+-    invoke-virtual {v2}, Landroid/os/Parcel;->recycle()V
+-
+-    throw p0
+-.end method
+-
+-.method private synthetic lambda$new$0()V
+     .locals 0
+ 
+-    invoke-direct {p0}, Lcom/samsung/android/displayquality/SemDisplayQuality;->checkBrightnessModeAndRunOutdoorVisibilityEnhancer()V
+-
+-    return-void
+-.end method
+-
+-.method private setAmbientLux(I)V
+-    .locals 1
+-
+-    const v0, 0xc350
+-
+-    if-lt p1, v0, :cond_1
+-
+-    iget p1, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mOutdoorMode:I
+-
+-    const/16 v0, 0x11b
+-
+-    if-ne p1, v0, :cond_0
+-
+-    return-void
+-
+-    :cond_0
+-    iput v0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mOutdoorMode:I
+-
+-    goto :goto_0
+-
+-    :cond_1
+-    const/16 v0, 0x2710
+-
+-    if-lt p1, v0, :cond_3
+-
+-    iget p1, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mOutdoorMode:I
+-
+-    const/16 v0, 0x11a
+-
+-    if-ne p1, v0, :cond_2
+-
+-    return-void
+-
+-    :cond_2
+-    iput v0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mOutdoorMode:I
+-
+-    goto :goto_0
+-
+-    :cond_3
+-    const/16 v0, 0x1388
+-
+-    if-lt p1, v0, :cond_5
+-
+-    iget p1, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mOutdoorMode:I
+-
+-    const/16 v0, 0x119
+-
+-    if-ne p1, v0, :cond_4
+-
+-    return-void
+-
+-    :cond_4
+-    iput v0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mOutdoorMode:I
+-
+-    goto :goto_0
+-
+-    :cond_5
+-    if-lez p1, :cond_7
+-
+-    iget p1, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mOutdoorMode:I
+-
+-    const/4 v0, -0x1
+-
+-    if-ne p1, v0, :cond_6
+-
+-    return-void
+-
+-    :cond_6
+-    iput v0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mOutdoorMode:I
+-
+-    :goto_0
+-    iget p1, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mOutdoorMode:I
+-
+-    invoke-direct {p0, p1}, Lcom/samsung/android/displayquality/SemDisplayQuality;->setOutdoorMode(I)V
+-
+-    :cond_7
+-    return-void
+-.end method
+-
+-.method private setOutdoorMode(I)V
+-    .locals 7
+-
+-    const-string v0, "Failed to set display color: "
+-
+-    new-instance v1, Ljava/lang/StringBuilder;
+-
+-    const-string/jumbo v2, "setOutdoorMode: "
+-
+-    invoke-direct {v1, v2}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+-
+-    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object v1
+-
+-    const-string v2, "SemDisplayQualityQct"
+-
+-    invoke-static {v2, v1}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    const-string v1, "SurfaceFlinger"
+-
+-    invoke-static {v1}, Landroid/os/ServiceManager;->getService(Ljava/lang/String;)Landroid/os/IBinder;
++    invoke-direct {p0, p1}, Lcom/samsung/android/displayquality/SemDisplayQualityAP;-><init>(Landroid/content/Context;)V
+ 
+-    move-result-object v1
++    iget-boolean p0, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->DEBUG:Z
+ 
+-    if-nez v1, :cond_0
++    if-eqz p0, :cond_0
+ 
+-    const-string p0, "Failed to get service SurfaceFlinger"
++    const-string p0, "SemDisplayQualityDummy"
+ 
+-    invoke-static {v2, p0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;)I
++    const-string p1, "SemDisplayQuality"
+ 
+-    return-void
++    invoke-static {p0, p1}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
+ 
+     :cond_0
+-    invoke-static {}, Landroid/os/Parcel;->obtain()Landroid/os/Parcel;
+-
+-    move-result-object v3
+-
+-    const-string v4, "android.ui.ISurfaceComposer"
+-
+-    invoke-virtual {v3, v4}, Landroid/os/Parcel;->writeInterfaceToken(Ljava/lang/String;)V
+-
+-    const/4 v4, -0x1
+-
+-    const/4 v5, 0x0
+-
+-    if-ne p1, v4, :cond_2
+-
+-    iget-object p1, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->mContext:Landroid/content/Context;
+-
+-    invoke-virtual {p1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+-
+-    move-result-object p1
+-
+-    const-string/jumbo v4, "screen_mode_setting"
+-
+-    const/4 v6, 0x4
+-
+-    invoke-static {p1, v4, v6}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+-
+-    move-result p1
+-
+-    iput p1, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSettingScreenMode:I
+-
+-    new-instance p1, Ljava/lang/StringBuilder;
+-
+-    const-string v4, "getSettingScreenMode: "
+-
+-    invoke-direct {p1, v4}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+-
+-    iget v4, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSettingScreenMode:I
+-
+-    invoke-static {p1, v4, v2}, Lcom/android/server/DeviceIdleController$$ExternalSyntheticOutline0;->m(Ljava/lang/StringBuilder;ILjava/lang/String;)V
+-
+-    iget p0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mSettingScreenMode:I
+-
+-    const/4 p1, 0x3
+-
+-    if-ne p0, p1, :cond_1
+-
+-    invoke-virtual {v3, v5}, Landroid/os/Parcel;->writeInt(I)V
+-
+-    goto :goto_0
+-
+-    :cond_1
+-    const/4 p0, 0x1
+-
+-    invoke-virtual {v3, p0}, Landroid/os/Parcel;->writeInt(I)V
+-
+-    goto :goto_0
+-
+-    :cond_2
+-    invoke-virtual {v3, v5}, Landroid/os/Parcel;->writeInt(I)V
+-
+-    const/4 p0, 0x7
+-
+-    invoke-virtual {v3, p0}, Landroid/os/Parcel;->writeInt(I)V
+-
+-    invoke-virtual {v3, p1}, Landroid/os/Parcel;->writeInt(I)V
+-
+-    :goto_0
+-    const/16 p0, 0x3ff
+-
+-    const/4 p1, 0x0
+-
+-    :try_start_0
+-    invoke-interface {v1, p0, v3, p1, v5}, Landroid/os/IBinder;->transact(ILandroid/os/Parcel;Landroid/os/Parcel;I)Z
+-    :try_end_0
+-    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+-
+-    :goto_1
+-    invoke-virtual {v3}, Landroid/os/Parcel;->recycle()V
+-
+-    goto :goto_2
+-
+-    :catchall_0
+-    move-exception p0
+-
+-    goto :goto_3
+-
+-    :catch_0
+-    move-exception p0
+-
+-    :try_start_1
+-    new-instance p1, Ljava/lang/StringBuilder;
+-
+-    invoke-direct {p1, v0}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+-
+-    invoke-virtual {p1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {p1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object p0
+-
+-    invoke-static {v2, p0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;)I
+-    :try_end_1
+-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+-
+-    goto :goto_1
+-
+-    :goto_2
+     return-void
+-
+-    :goto_3
+-    invoke-virtual {v3}, Landroid/os/Parcel;->recycle()V
+-
+-    throw p0
+ .end method
+ 
+ 
+ # virtual methods
+-.method public enhanceOutdoorVisibilityByLux(I)V
+-    .locals 2
+-
+-    const-string v0, "enhanceOutdoorVisibilityByLux: "
+-
+-    const-string v1, "SemDisplayQualityQct"
+-
+-    invoke-static {p1, v0, v1}, Lcom/android/server/AnyMotionDetector$$ExternalSyntheticOutline0;->m(ILjava/lang/String;Ljava/lang/String;)V
+-
+-    invoke-direct {p0, p1}, Lcom/samsung/android/displayquality/SemDisplayQuality;->setAmbientLux(I)V
+-
+-    return-void
+-.end method
+-
+ .method public handleAutoBrightnessModeOff()V
+-    .locals 1
+-
+-    iget-object p0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mHalClient:Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;
+-
+-    const/4 v0, 0x0
+-
+-    invoke-virtual {p0, v0}, Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;->setOutdoorVisibilityEnhancerEnabled(Z)I
++    .locals 0
+ 
+     return-void
+ .end method
+ 
+ .method public handleAutoBrightnessModeOn()V
+-    .locals 1
+-
+-    iget-object p0, p0, Lcom/samsung/android/displayquality/SemDisplayQuality;->mHalClient:Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;
+-
+-    const/4 v0, 0x1
+-
+-    invoke-virtual {p0, v0}, Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;->setOutdoorVisibilityEnhancerEnabled(Z)I
++    .locals 0
+ 
+     return-void
+ .end method
+@@ -723,17 +70,3 @@
+ 
+     return-void
+ .end method
+-
+-.method public setAdaptiveSync(Z)V
+-    .locals 2
+-
+-    const-string/jumbo v0, "setAdaptiveSync: "
+-
+-    const-string v1, "SemDisplayQualityQct"
+-
+-    invoke-static {v0, v1, p1}, Lcom/android/server/DeviceIdleController$$ExternalSyntheticOutline0;->m$1(Ljava/lang/String;Ljava/lang/String;Z)V
+-
+-    invoke-direct {p0, p1}, Lcom/samsung/android/displayquality/SemDisplayQuality;->enableAdaptiveSync(Z)V
+-
+-    return-void
+-.end method
+diff --git a/smali_classes2/com/samsung/android/displayquality/SemDisplayQualityAidlClient.smali b/smali_classes2/com/samsung/android/displayquality/SemDisplayQualityAidlClient.smali
+index dd8eec6..4341abf 100644
+--- a/smali_classes2/com/samsung/android/displayquality/SemDisplayQualityAidlClient.smali
++++ b/smali_classes2/com/samsung/android/displayquality/SemDisplayQualityAidlClient.smali
+@@ -4,8 +4,6 @@
+ 
+ 
+ # static fields
+-.field private static final AIDL_CLIENT_NAME:Ljava/lang/String; = "vendor.samsung.hardware.displayquality.ISehDisplayQuality/default"
+-
+ .field public static final RESULT_DISABLED:I = 0x0
+ 
+ .field public static final RESULT_ENABLED:I = 0x1
+@@ -14,143 +12,35 @@
+ 
+ .field public static final RESULT_NO_SUPPORT:I = 0x3
+ 
+-.field private static final TAG:Ljava/lang/String; = "SemDisplayQualityAidlClient"
+-
+-
+-# instance fields
+-.field private mSehDisplayQuality:Lvendor/samsung/hardware/displayquality/ISehDisplayQuality;
++.field private static final TAG:Ljava/lang/String; = "SemDisplayQualityAidlClientDummy"
+ 
+ 
+ # direct methods
+ .method public constructor <init>()V
+-    .locals 5
+-
+-    const-string v0, "SemDisplayQualityAidlClient"
+-
+-    const-string v1, "AIDL asInterface success, version "
++    .locals 1
+ 
+     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+ 
+-    const/4 v2, 0x0
+-
+-    iput-object v2, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;->mSehDisplayQuality:Lvendor/samsung/hardware/displayquality/ISehDisplayQuality;
+-
+-    :try_start_0
+-    const-string/jumbo v2, "vendor.samsung.hardware.displayquality.ISehDisplayQuality/default"
+-
+-    invoke-static {v2}, Landroid/os/ServiceManager;->waitForService(Ljava/lang/String;)Landroid/os/IBinder;
+-
+-    move-result-object v2
+-
+-    if-nez v2, :cond_0
+-
+-    const-string/jumbo p0, "vendor.samsung.hardware.displayquality.ISehDisplayQuality/default getService failed"
+-
+-    invoke-static {v0, p0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    goto :goto_1
+-
+-    :cond_0
+-    sget v3, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality$Stub;->$r8$clinit:I
+-
+-    sget-object v3, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality;->DESCRIPTOR:Ljava/lang/String;
+-
+-    invoke-interface {v2, v3}, Landroid/os/IBinder;->queryLocalInterface(Ljava/lang/String;)Landroid/os/IInterface;
+-
+-    move-result-object v3
+-
+-    if-eqz v3, :cond_1
+-
+-    instance-of v4, v3, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality;
+-
+-    if-eqz v4, :cond_1
+-
+-    check-cast v3, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality;
+-
+-    goto :goto_0
+-
+-    :cond_1
+-    new-instance v3, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality$Stub$Proxy;
+-
+-    invoke-direct {v3}, Ljava/lang/Object;-><init>()V
+-
+-    const/4 v4, -0x1
++    const-string p0, "SemDisplayQualityAidlClientDummy"
+ 
+-    iput v4, v3, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality$Stub$Proxy;->mCachedVersion:I
++    const-string v0, "SemDisplayQualityAidlClient dummy"
+ 
+-    iput-object v2, v3, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality$Stub$Proxy;->mRemote:Landroid/os/IBinder;
++    invoke-static {p0, v0}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
+ 
+-    :goto_0
+-    iput-object v3, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;->mSehDisplayQuality:Lvendor/samsung/hardware/displayquality/ISehDisplayQuality;
+-
+-    new-instance v2, Ljava/lang/StringBuilder;
+-
+-    invoke-direct {v2, v1}, Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+-
+-    iget-object p0, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;->mSehDisplayQuality:Lvendor/samsung/hardware/displayquality/ISehDisplayQuality;
+-
+-    check-cast p0, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality$Stub$Proxy;
+-
+-    invoke-virtual {p0}, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality$Stub$Proxy;->getInterfaceVersion()I
+-
+-    move-result p0
+-
+-    invoke-virtual {v2, p0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object p0
+-
+-    invoke-static {v0, p0}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
+-    :try_end_0
+-    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+-
+-    goto :goto_1
+-
+-    :catch_0
+-    const-string p0, "AIDL failed"
+-
+-    invoke-static {v0, p0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    :goto_1
+     return-void
+ .end method
+ 
+ 
+ # virtual methods
+ .method public setOutdoorVisibilityEnhancerEnabled(Z)I
+-    .locals 1
+-
+-    iget-object p0, p0, Lcom/samsung/android/displayquality/SemDisplayQualityAidlClient;->mSehDisplayQuality:Lvendor/samsung/hardware/displayquality/ISehDisplayQuality;
+-
+-    const-string v0, "SemDisplayQualityAidlClient"
+-
+-    if-eqz p0, :cond_0
+-
+-    :try_start_0
+-    check-cast p0, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality$Stub$Proxy;
+-
+-    invoke-virtual {p0, p1}, Lvendor/samsung/hardware/displayquality/ISehDisplayQuality$Stub$Proxy;->setOutdoorVisibilityEnhancerEnabled(Z)I
+-
+-    move-result p0
+-    :try_end_0
+-    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+-
+-    return p0
+-
+-    :catch_0
+-    const-string/jumbo p0, "setOutdoorVisibilityEnhancerEnabled failed"
+-
+-    invoke-static {v0, p0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;)I
++    .locals 0
+ 
+-    goto :goto_0
++    const-string p0, "SemDisplayQualityAidlClientDummy"
+ 
+-    :cond_0
+-    const-string/jumbo p0, "mSehDisplayQuality is null"
++    const-string/jumbo p1, "setOutdoorVisibilityEnhancerEnabled dummy"
+ 
+-    invoke-static {v0, p0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;)I
++    invoke-static {p0, p1}, Landroid/util/Slog;->d(Ljava/lang/String;Ljava/lang/String;)I
+ 
+-    :goto_0
+     const/4 p0, 0x0
+ 
+     return p0
+diff --git a/smali_classes2/com/samsung/android/displayquality/SemDisplayQualityManagerService.smali b/smali_classes2/com/samsung/android/displayquality/SemDisplayQualityManagerService.smali
+index 8f3701c..cd78ae9 100644
+--- a/smali_classes2/com/samsung/android/displayquality/SemDisplayQualityManagerService.smali
++++ b/smali_classes2/com/samsung/android/displayquality/SemDisplayQualityManagerService.smali
+@@ -146,7 +146,7 @@
+ 
+     :cond_0
+     :try_start_1
+-    invoke-virtual {v1, p1}, Lcom/samsung/android/displayquality/SemDisplayQuality;->enhanceOutdoorVisibilityByLux(I)V
++    invoke-virtual {v1, p1}, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->enhanceOutdoorVisibilityByLux(I)V
+     :try_end_1
+     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
+     .catchall {:try_start_1 .. :try_end_1} :catchall_0
+@@ -209,7 +209,7 @@
+ 
+     :cond_0
+     :try_start_1
+-    invoke-virtual {v1, p1}, Lcom/samsung/android/displayquality/SemDisplayQuality;->setAdaptiveSync(Z)V
++    invoke-virtual {v1, p1}, Lcom/samsung/android/displayquality/SemDisplayQualityAP;->setAdaptiveSync(Z)V
+     :try_end_1
+     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
+     .catchall {:try_start_1 .. :try_end_1} :catchall_0
