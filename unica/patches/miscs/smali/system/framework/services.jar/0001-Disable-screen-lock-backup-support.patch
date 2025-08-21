@@ -1,0 +1,58 @@
+From be1f9dedce8141a1329ab95ec8794ba41412e4f8 Mon Sep 17 00:00:00 2001
+From: Salvo Giangreco <giangrecosalvo9@gmail.com>
+Adapted for OneUI7 tablets: Ravi Chaudhary <ravichaudhary133@gmail.com>
+Date: Wed, 19 Aug 2025 18:01:12 +0530
+Subject: [PATCH] Disable screen lock backup support
+
+---
+ .../locksettings/LockSettingsService.smali    | 30 +------------------
+ 1 file changed, 1 insertion(+), 29 deletions(-)
+
+diff --git a/smali/com/android/server/locksettings/LockSettingsService.smali b/smali/com/android/server/locksettings/LockSettingsService.smali
+index 978c99b5..a0b98740 100644
+--- a/smali/com/android/server/locksettings/LockSettingsService.smali
++++ b/smali/com/android/server/locksettings/LockSettingsService.smali
+@@ -1350,38 +1350,10 @@
+ .end method
+ 
+ .method public static isEnablePrevCredential()Z
+-    .locals 2
+-
+-    const-string/jumbo v0, "ro.organization_owned"
+-
+-    const/4 v1, 0x0
+-
+-    invoke-static {v0, v1}, Landroid/os/SystemProperties;->get(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+-
+-    move-result-object v0
+-
+-    if-eqz v0, :cond_1
+-
+-    const-string/jumbo v1, "true"
+-
+-    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+-
+-    move-result v0
+-
+-    if-nez v0, :cond_0
+-
+-    goto :goto_0
++    .locals 1
+ 
+-    :cond_0
+     const/4 v0, 0x0
+ 
+-    goto :goto_1
+-
+-    :cond_1
+-    :goto_0
+-    const/4 v0, 0x1
+-
+-    :goto_1
+     return v0
+ .end method
+ 
+-- 
+2.46.1
+
+
