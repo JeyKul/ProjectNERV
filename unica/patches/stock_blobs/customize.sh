@@ -14,8 +14,6 @@ system/media/battery_low.spi
 system/media/battery_temperature_error.spi
 system/media/battery_temperature_limit.spi
 system/media/battery_water_usb.spi
-system/media/bootsamsungloop.qmg
-system/media/bootsamsung.qmg
 system/media/charging_vi_100.spi
 system/media/charging_vi_level1.spi
 system/media/charging_vi_level2.spi
