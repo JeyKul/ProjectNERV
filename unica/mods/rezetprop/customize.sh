@@ -11,7 +11,11 @@ LOG "- Applying prop spoofer"
     echo ""
 } >> "$WORK_DIR/system/system/etc/init/hw/init.rc"
 
-sed -i 's/${ro.boot.warranty_bit}/0/g' "$WORK_DIR/system/system/etc/init/init.rilcommon.rc"
+if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "gts9p" ]]; then
+    sed -i 's/${ro.boot.warranty_bit}/0/g' "$WORK_DIR/system/system/etc/init/init.rilcommon.rc"
+elif [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "gts9pwifi" ]]; then
+    LOG "Skipping rilcommon.rc patch for WiFi variant..."
+fi
 
 LINES="$(sed -n "/^(allow init init_exec\b/=" "$WORK_DIR/system/system/etc/selinux/plat_sepolicy.cil")"
 for l in $LINES; do
