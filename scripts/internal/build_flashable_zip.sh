@@ -32,7 +32,7 @@ ZIP_FILE_SUFFIX="-sign.zip"
 TARGET_DEVICE="$TARGET_CODENAME"
 [ -n "$TARGET_MODEL" ] && TARGET_DEVICE="$TARGET_MODEL"
 
-ZIP_FILE_NAME="ProjectNERV_${ROM_VERSION}_$(date +%Y%m%d)_${TARGET_DEVICE}${ZIP_FILE_SUFFIX}"
+ZIP_FILE_NAME="TerracottaROM_${ROM_VERSION}_$(date +%Y%m%d)_${TARGET_DEVICE}${ZIP_FILE_SUFFIX}"
 while [ -f "$OUT_DIR/$ZIP_FILE_NAME" ]; do
     INCREMENTAL=$((INCREMENTAL + 1))
     ZIP_FILE_NAME="ProjectNERV_${ROM_VERSION}_$(date +%Y%m%d)-${INCREMENTAL}_${TARGET_DEVICE}${ZIP_FILE_SUFFIX}"
@@ -459,11 +459,24 @@ PRINT_HEADER()
     echo    'ui_print(" ");'
     echo    'ui_print("************************************************");'
     echo    'ui_print(" ");'
-    echo    'ui_print("              _  __ ____ ___  _   __");'
-    echo    'ui_print("             / |/ // __// _ \| | / /");'
-    echo    'ui_print("            /    // _/ / , _/| |/ / ");'
-    echo    'ui_print("           /_/|_//___//_/|_| |___/  ");'
-    echo    'ui_print(" ");'
+    echo    'ui_print("    ");'                
+    echo    'ui_print("               %%@      *%@          ");'
+    echo    'ui_print("           *%@ @%@@     #@@          ");'
+    echo    'ui_print("           %@@ @#@@    *%@           ");'
+    echo    'ui_print("            @@@ *#@@  %*%@           ");'
+    echo    'ui_print("      *#%   @*%#@#*%@%*#%            ");'
+    echo    'ui_print("       %@@@   *#*#%%%%%*             ");'
+    echo    'ui_print("         %@@@@#%@%%*###@             ");'
+    echo    'ui_print("            %#@%@@%*#*%@             ");'
+    echo    'ui_print("            #%%@@@#%#%*#@            ");'
+    echo    'ui_print("             #*#%%##**#***##%%%      ");'
+    echo    'ui_print("             ***#****#%%%*#%*#%@     ");'
+    echo    'ui_print("             ******#%%               ");'
+    echo    'ui_print("           @******%@                 ");'
+    echo    'ui_print("          @@****#@@@                 ");'
+    echo    'ui_print("         %@@**#@@@@@                 ");'
+    echo    'ui_print("        %@@@@@@@@@@                 ");'
+    echo    'ui_print("        Terracotta Pie :p              ");'
     echo -n 'ui_print("'
     for i in $(seq 1 "$SIDE_PADDING"); do
         echo -n ' '
