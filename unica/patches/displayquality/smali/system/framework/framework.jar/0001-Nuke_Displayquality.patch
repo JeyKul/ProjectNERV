@@ -1,0 +1,43 @@
+From 2bb6b3c96c266fc87b885f9fc73ca634c9548f56 Mon Sep 17 00:00:00 2001
+From: JeyKul <77121325+JeyKul@users.noreply.github.com>
+Date: Sun, 27 Jul 2025 00:29:29 +0200
+Subject: [PATCH] Nuke Displayquality
+
+---
+ .../android/displayquality/SemDisplayQualityFeature.smali   | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/smali_classes6/com/samsung/android/displayquality/SemDisplayQualityFeature.smali b/smali_classes6/com/samsung/android/displayquality/SemDisplayQualityFeature.smali
+index 24948d3..30ac218 100644
+--- a/smali_classes6/com/samsung/android/displayquality/SemDisplayQualityFeature.smali
++++ b/smali_classes6/com/samsung/android/displayquality/SemDisplayQualityFeature.smali
+@@ -12,7 +12,7 @@
+ 
+ .field public static final blacklist DP_RATIO_SUPPORT:Z
+ 
+-.field private static final blacklist DQ_SVC_FEATURE:Ljava/lang/String; = "QCT,ltm,hal"
++.field private static final blacklist DQ_SVC_FEATURE:Ljava/lang/String; = ""
+ 
+ .field public static final blacklist ENABLED:Z
+ 
+@@ -37,7 +37,7 @@
+ 
+     const-string v0, "QCT"
+ 
+-    const-string v1, "QCT,ltm,hal"
++    const-string v1, ""
+ 
+     invoke-virtual {v1, v0}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+ 
+@@ -96,7 +96,7 @@
+     goto :goto_2
+ 
+     :cond_2
+-    const-string v0, ""
++    move-object v0, v1
+ 
+     :goto_2
+     sput-object v0, Lcom/samsung/android/displayquality/SemDisplayQualityFeature;->PLATFORM:Ljava/lang/String;
+-- 
+2.39.5
+

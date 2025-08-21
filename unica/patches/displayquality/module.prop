@@ -1,0 +1,4 @@
+id=dedisplayquality
+name=Nuke Displayquality
+author=JeyKul
+description=Removes Displayquality from services.jar and framework.jar
