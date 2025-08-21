@@ -21,3 +21,4 @@
 /vendor/etc/VslMesDetector/MesDetectorLowlight\.tflite u:object_r:vendor_configs_file:s0
 /vendor/etc/VslMesDetector/MesDetectorNoise\.tflite u:object_r:vendor_configs_file:s0
 /vendor/etc/VslMesDetector/moire_detection\.tflite u:object_r:vendor_configs_file:s0
+/vendor/bin/hw/wpa_supplicant u:object_r:hal_wifi_supplicant_default_exec:s0
