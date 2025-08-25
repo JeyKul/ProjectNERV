@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="35" android:compileSdkVersionCodename="15" package="com.android.systemui.auto_generated_rro_product__" platformBuildVersionCode="35" platformBuildVersionName="15">
-    <application android:extractNativeLibs="false"/>
-    <overlay android:isStatic="true" android:priority="1" android:targetPackage="com.android.systemui"/>
-</manifest>

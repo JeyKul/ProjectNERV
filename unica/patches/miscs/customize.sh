@@ -1,7 +1,5 @@
-SKIPUNZIP=1
-
-SOURCE_FIRMWARE_PATH="$FW_DIR/$(echo -n "$SOURCE_FIRMWARE" | sed 's./._.g' | rev | cut -d "_" -f2- | rev)"
 TARGET_FIRMWARE_PATH="$FW_DIR/$(echo -n "$TARGET_FIRMWARE" | sed 's./._.g' | rev | cut -d "_" -f2- | rev)"
+
 
 # Fix portrait mode
 if [[ -f "$TARGET_FIRMWARE_PATH/vendor/lib64/libDualCamBokehCapture.camera.samsung.so" ]]; then
@@ -19,29 +17,15 @@ if [[ -f "$TARGET_FIRMWARE_PATH/vendor/lib64/libDualCamBokehCapture.camera.samsu
     fi
 fi
 
-# Enable/Disable camera cutout protection
+# Enable camera cutout protection
 if [[ "$SOURCE_SUPPORT_CUTOUT_PROTECTION" != "$TARGET_SUPPORT_CUTOUT_PROTECTION" ]]; then
-    if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "essi" ]]; then
-        RRO_APK="SystemUI__$(GET_PROP "$SOURCE_FIRMWARE_PATH/system/system/build.prop" "ro.product.system.name")__auto_generated_rro_product.apk"
-        XMLS_DIR="$APKTOOL_DIR/product/overlay/$RRO_APK/res/values"
+    DECODE_APK "system_ext" "priv-app/SystemUI/SystemUI.apk"
 
-        DECODE_APK "product" "overlay/$RRO_APK"
-        if [[ "$SOURCE_SUPPORT_CUTOUT_PROTECTION" == "true" ]]; then
-            sed -i "/CutoutProtection/d" "$XMLS_DIR/bools.xml"
-            rm -f "$XMLS_DIR/public.xml"
-        else
-            sed -i '$d' "$XMLS_DIR/bools.xml"
-            echo "    <bool name=\"config_enableDisplayCutoutProtection\">true</bool>" >> "$XMLS_DIR/bools.xml"
-            echo "</resources>" >> "$XMLS_DIR/bools.xml"
-        fi
-    else
-        cp -a --preserve=all "$SRC_DIR/unica/patches/miscs/product" "$APKTOOL_DIR"
-        SET_METADATA "product" "overlay/SystemUI__dm1qxxx__auto_generated_rro_product.apk" 0 0 644 "u:object_r:system_file:s0"
-    fi
+    FTP="$APKTOOL_DIR/system_ext/priv-app/SystemUI/SystemUI.apk/res/values/bools.xml"
+    R="\ \ \ \ <bool name=\"config_enableDisplayCutoutProtection\">$TARGET_SUPPORT_CUTOUT_PROTECTION</bool>"
+
+    sed -i "$(sed -n "/config_enableDisplayCutoutProtection/=" "$FTP") c$R" "$FTP"
 fi
-
-TARGET_DEVICE="$TARGET_CODENAME"
-[ -n "$TARGET_MODEL" ] && TARGET_DEVICE="$TARGET_MODEL"
 
 # Set custom Display ID prop
 SET_PROP "system" "ro.build.display.id" "Terracotta Rom | Based on UN1CA and Project NERV | $(echo -n ${ROM_VERSION} | cut -d "-" -f1)-${ROM_CODENAME} - ${TARGET_DEVICE} [$(GET_PROP "system" "ro.build.display.id")]"

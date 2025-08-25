@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="quick_settings_tiles_default">wifi,bt,dnd,flashlight,rotation,battery,cell,airplane,night,screenrecord,qr_code_scanner,custom(com.google.android.gms/.nearby.sharing.SharingTileService),mictoggle,cameratoggle,custom(com.google.android.permissioncontroller/com.android.permissioncontroller.permission.service.v33.SafetyCenterQsTileService)</string>
-</resources>
