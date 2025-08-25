@@ -17,11 +17,16 @@ if [[ -f "$TARGET_FIRMWARE_PATH/vendor/lib64/libDualCamBokehCapture.camera.samsu
     fi
 fi
 
-# Enable camera cutout protection
+# Enable/Disable camera cutout protection
 if [[ "$SOURCE_SUPPORT_CUTOUT_PROTECTION" != "$TARGET_SUPPORT_CUTOUT_PROTECTION" ]]; then
-    DECODE_APK "system_ext" "priv-app/SystemUI/SystemUI.apk"
+    if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "qssi" ]]; then
+        DECODE_APK "system_ext" "priv-app/SystemUI/SystemUI.apk"
+        FTP="$APKTOOL_DIR/system_ext/priv-app/SystemUI/SystemUI.apk/res/values/bools.xml"
+    elif [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "essi" ]]; then
+        DECODE_APK "product" "overlay/SystemUI__r11sxxx__auto_generated_rro_product.apk"
+        FTP="$APKTOOL_DIR/product/overlay/SystemUI__r11sxxx__auto_generated_rro_product.apk/res/values/bools.xml"
+    fi
 
-    FTP="$APKTOOL_DIR/system_ext/priv-app/SystemUI/SystemUI.apk/res/values/bools.xml"
     R="\ \ \ \ <bool name=\"config_enableDisplayCutoutProtection\">$TARGET_SUPPORT_CUTOUT_PROTECTION</bool>"
 
     sed -i "$(sed -n "/config_enableDisplayCutoutProtection/=" "$FTP") c$R" "$FTP"
