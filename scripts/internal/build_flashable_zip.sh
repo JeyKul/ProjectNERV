@@ -588,18 +588,28 @@ GENERATE_OTA_METADATA
 
 LOG "- Creating zip"
 EVAL "rm -f \"$OUT_DIR/rom.zip\"" || exit 1
-pushd "$TMP_DIR" > /dev/null
 
-# 1. Compressed files (everything except zips, special dat files, META-INF)
-find . -type f ! -name "*.new.dat.br" ! -name "*.patch.dat" > compressed.txt
+STORED="$OUT_DIR/stored.txt"
+COMPRESSED="$OUT_DIR/compressed.txt"
 
-# 2. Stored files (special dat files + META-INF folder)
-find . -type f \( -name "*.new.dat.br" -o -name "*.patch.dat" -o -name "META-INF" \) > stored.txt
-META_INF="./META-INF"
+[ -f "$STORED" ] || [ -f "$COMPRESSED" ] && rm -f "$STORED" "$COMPRESSED"
+touch "$STORED" "$COMPRESSED"
 
-# Add batches
-EVAL "7z a -tzip -mx=9 -mmt=$(nproc --all) \"$TMP_DIR/rom.zip\" @\"compressed.txt\""
-EVAL "7z a -tzip -mx=0 -mmt=$(nproc --all) \"$TMP_DIR/rom.zip\" @\"stored.txt\" \"$META_INF\""
+find "$TMP_DIR" -type f \( -name "*.new.dat.br" -o -name "*.patch.dat" \) -printf "%P\n" >> "$STORED"
+find "$TMP_DIR/META-INF" -type f -printf "%P\n" >> "$STORED"
+find "$TMP_DIR" -type f \
+    ! -name "*.zip" \
+    ! -name "*.new.dat.br" \
+    ! -name "*.patch.dat" \
+    ! -path "$TMP_DIR/META-INF/*" -printf "%P\n" >> "$COMPRESSED"
+
+(
+cd "$TMP_DIR" || exit 1
+EVAL "7z a -tzip -mx=0 -mmt=$(nproc) \"$TMP_DIR/rom.zip\" @\"$STORED\"" || exit 1
+EVAL "7z a -tzip -mx=9 -mmt=$(nproc) \"$TMP_DIR/rom.zip\" @\"$COMPRESSED\"" || exit 1
+)
+
+rm -f "$STORED" "$COMPRESSED"
 
 if $ROM_IS_OFFICIAL; then
     LOG "- Signing zip"
