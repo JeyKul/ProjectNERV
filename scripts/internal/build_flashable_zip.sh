@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 #
 # Copyright (C) 2023 Salvo Giangreco
 #
@@ -589,14 +588,18 @@ GENERATE_OTA_METADATA
 
 LOG "- Creating zip"
 EVAL "rm -f \"$OUT_DIR/rom.zip\"" || exit 1
-EVAL "pushd \"$TMP_DIR\""
+pushd "$TMP_DIR" > /dev/null
 
-find . -type f ! -name "*.new.dat.br" ! -name "*.patch.dat" >> "compressed"
-find . -type f \( -name "*.new.dat.br" -o -name "*.patch.dat" -o -name "META-INF" \) >> "stored"
-find "META-INF" -type f >> "stored"
+# 1. Compressed files (everything except zips, special dat files, META-INF)
+find . -type f ! -name "*.new.dat.br" ! -name "*.patch.dat" > compressed.txt
 
-EVAL "7z a -tzip -mx=9 -mmt=\"$(nproc)\" \"$OUT_ZIP\" @\"compressed\""
-EVAL "7z a -tzip -mx=0 -mmt=\"$(nproc)\" \"$OUT_ZIP\" @\"stored\""
+# 2. Stored files (special dat files + META-INF folder)
+find . -type f \( -name "*.new.dat.br" -o -name "*.patch.dat" -o -name "META-INF" \) > stored.txt
+META_INF="./META-INF"
+
+# Add batches
+EVAL "7z a -tzip -mx=9 -mmt=$(nproc --all) \"$TMP_DIR/rom.zip\" @\"compressed.txt\""
+EVAL "7z a -tzip -mx=0 -mmt=$(nproc --all) \"$TMP_DIR/rom.zip\" @\"stored.txt\" \"$META_INF\""
 
 if $ROM_IS_OFFICIAL; then
     LOG "- Signing zip"
@@ -606,6 +609,6 @@ else
     mv -f "$TMP_DIR/rom.zip" "$OUT_DIR/$ZIP_FILE_NAME"
 fi
 
-EVAL "popd"
+popd > /dev/null
 
 exit 0
