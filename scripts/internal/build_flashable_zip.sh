@@ -595,13 +595,16 @@ COMPRESSED="$OUT_DIR/compressed.txt"
 [ -f "$STORED" ] || [ -f "$COMPRESSED" ] && rm -f "$STORED" "$COMPRESSED"
 touch "$STORED" "$COMPRESSED"
 
-find "$TMP_DIR" -type f \( -name "*.new.dat.br" -o -name "*.patch.dat" \) -printf "%P\n" >> "$STORED"
-find "$TMP_DIR/META-INF" -type f -printf "%P\n" >> "$STORED"
+find "$TMP_DIR" -type f \( -name "*.new.dat.br" -o -name "*.patch.dat" \) >> "$STORED"
+find "$TMP_DIR/META-INF" -type f >> "$STORED"
 find "$TMP_DIR" -type f \
     ! -name "*.zip" \
     ! -name "*.new.dat.br" \
     ! -name "*.patch.dat" \
-    ! -path "$TMP_DIR/META-INF/*" -printf "%P\n" >> "$COMPRESSED"
+    ! -path "$TMP_DIR/META-INF/*" >> "$COMPRESSED"
+
+sed -i "s|^$TMP_DIR/||g" "$STORED" \
+    && sed -i "s|^$TMP_DIR/||g" "$COMPRESSED"
 
 (
 cd "$TMP_DIR" || exit 1
