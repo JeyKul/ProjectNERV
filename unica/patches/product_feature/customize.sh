@@ -121,7 +121,6 @@ if [[ "$(GET_FP_SENSOR_TYPE "$SOURCE_FP_SENSOR_CONFIG")" != "$(GET_FP_SENSOR_TYP
     if [[ "$(GET_FP_SENSOR_TYPE "$TARGET_FP_SENSOR_CONFIG")" == "optical" ]]; then
         DECODE_APK "system" "system/priv-app/BiometricSetting/BiometricSetting.apk"
     elif [[ "$(GET_FP_SENSOR_TYPE "$TARGET_FP_SENSOR_CONFIG")" == "side" ]]; then
-        ADD_TO_WORK_DIR "b5qxxx" "system" "."
         DELETE_FROM_WORK_DIR "system" "system/priv-app/BiometricSetting/oat"
         APPLY_PATCH "system_ext" "priv-app/SystemUI/SystemUI.apk" "$SRC_DIR/unica/patches/product_feature/fingerprint/SystemUI.apk/0001-Set-SECURITY_FINGERPRINT_IN_DISPLAY_OPTICAL-to-false.patch"
         APPLY_PATCH "system_ext" "priv-app/SystemUI/SystemUI.apk" "$SRC_DIR/unica/patches/product_feature/fingerprint/SystemUI.apk/0002-Set-SECURITY_FINGERPRINT_IN_DISPLAY-to-false.patch"
