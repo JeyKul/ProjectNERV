@@ -10,7 +10,14 @@ jobs:
   build:
     runs-on: self-hosted
 
+
     steps:
+      - name: Clean repo workspace
+        run: |
+          echo "Cleaning $GITHUB_WORKSPACE..."
+          rm -rf "$GITHUB_WORKSPACE"
+          mkdir -p "$GITHUB_WORKSPACE"
+
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
