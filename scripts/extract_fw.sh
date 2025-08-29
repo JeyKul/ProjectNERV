@@ -423,7 +423,7 @@ for i in "${FIRMWARES[@]}"; do
 
     echo -n "$DOWNLOADED_FIRMWARE" > "$FW_DIR/${MODEL}_${CSC}/.extracted"
 
-    if [ -n "$GITHUB_ACTIONS" ]; then
+    if [ -n "$GITHUB_ACTIONS" ] && [ "$RUNNER_NAME" != "self-hosted" ]; then
         rm -rf "$ODIN_DIR/${MODEL}_${CSC}"
     fi
 
