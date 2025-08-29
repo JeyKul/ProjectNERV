@@ -18,7 +18,7 @@ jobs:
 
       - name: Prepare Odin directory
         run: |
-          mkdir -p out/odin
+          mkdir -p out/
           ln -s ~/odin out/odin || true
 
       - name: Set up build environment
