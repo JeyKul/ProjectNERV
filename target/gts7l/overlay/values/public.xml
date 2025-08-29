@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public type="array" name="config_High_Dynamic_Range_Display_Solution_Brightness_Value" id="0x7f010000" />
+    <public type="array" name="config_HysteresisBrightInputLux" id="0x7f010001" />
+    <public type="array" name="config_HysteresisBrightOutputLux" id="0x7f010002" />
+    <public type="array" name="config_HysteresisDarkInputLux" id="0x7f010003" />
+    <public type="array" name="config_HysteresisDarkOutputLux" id="0x7f010004" />
+    <public type="array" name="config_OverHeat_App_Display_Solution_Brightness_Value" id="0x7f010005" />
+    <public type="array" name="config_Overheat_Control_Support_App_List" id="0x7f010006" />
+    <public type="array" name="config_Screen_Brightness_Backlight_Value" id="0x7f010007" />
+    <public type="array" name="config_Screen_Brightness_Nits_Value" id="0x7f010008" />
+    <public type="array" name="config_Video_Enhancer_Display_Solution_Brightness_Value" id="0x7f010009" />
+    <public type="array" name="config_aodBrightnessValues" id="0x7f01000a" />
+    <public type="array" name="config_autoBrightnessDisplayValuesNits" id="0x7f01000b" />
+    <public type="array" name="config_autoBrightnessLcdBacklightValues" id="0x7f01000c" />
+    <public type="array" name="config_autoBrightnessLevels" id="0x7f01000d" />
+    <public type="array" name="config_minimumExpressiveBrightnessValues" id="0x7f01000e" />
+    <public type="array" name="config_screenBrightnessBacklight" id="0x7f01000f" />
+    <public type="array" name="config_screenBrightnessNits" id="0x7f010010" />
+    <public type="array" name="config_screenBrightnessRangeForClearView" id="0x7f010011" />
+    <public type="bool" name="config_adaptive_display_solution_enabled" id="0x7f020000" />
+    <public type="bool" name="config_dynamic_automatic_brightness_available" id="0x7f020001" />
+    <public type="bool" name="config_mdnie_scenario_control_enabled" id="0x7f020002" />
+    <public type="bool" name="config_showNavigationBar" id="0x7f020003" />
+    <public type="bool" name="config_supportAudioSourceUnprocessed" id="0x7f020004" />
+    <public type="color" name="tw_screen_background_color_dark" id="0x7f030000" />
+    <public type="dimen" name="config_screenBrightnessDimFloat" id="0x7f040000" />
+    <public type="dimen" name="config_screenBrightnessSettingDefaultFloat" id="0x7f040001" />
+    <public type="dimen" name="config_screenBrightnessSettingMaximumFloat" id="0x7f040002" />
+    <public type="dimen" name="config_screenBrightnessSettingMinimumFloat" id="0x7f040003" />
+    <public type="integer" name="config_autoBrightnessHbmAmbientLux" id="0x7f050000" />
+    <public type="integer" name="config_lowLimitAtHighestAutoBrightnessLevel" id="0x7f050001" />
+    <public type="integer" name="config_minimumBrightnessStepValue" id="0x7f050002" />
+    <public type="integer" name="config_screenBrightnessDim" id="0x7f050003" />
+    <public type="integer" name="config_screenBrightnessExtendedMaximum" id="0x7f050004" />
+    <public type="integer" name="config_screenBrightnessSettingDefault" id="0x7f050005" />
+    <public type="integer" name="config_screenBrightnessSettingMaximum" id="0x7f050006" />
+    <public type="integer" name="config_screenBrightnessSettingMinimum" id="0x7f050007" />
+    <public type="integer" name="config_valueOfVirtualZeroCandela" id="0x7f050008" />
+</resources>
