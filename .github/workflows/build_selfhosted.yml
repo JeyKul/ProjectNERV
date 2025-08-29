@@ -27,7 +27,7 @@ jobs:
           DEBIAN_FRONTEND=noninteractive sudo apt install -yq \
             p7zip-full jq attr ccache clang ffmpeg golang \
             libbrotli-dev libgtest-dev libprotobuf-dev libunwind-dev libpcre2-dev \
-            libzstd-dev lld jq protobuf-compiler pcre2-utils webp \
+            libzstd-dev lld jq protobuf-compiler pcre2-utils webp cmake\
             curl xxd patchelf flex bison libarchive-tools build-essential python3.13-venv device-tree-compiler
           sudo modprobe erofs f2fs
           git config --global user.name "github-actions[bot]"
