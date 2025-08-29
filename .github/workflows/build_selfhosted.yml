@@ -28,23 +28,16 @@ jobs:
             p7zip-full jq attr ccache clang ffmpeg golang \
             libbrotli-dev libgtest-dev libprotobuf-dev libunwind-dev libpcre2-dev \
             libzstd-dev lld jq protobuf-compiler pcre2-utils webp cmake\
-            curl xxd patchelf flex bison libarchive-tools build-essential python3.13-venv device-tree-compiler
+            curl xxd patchelf flex bison libarchive-tools build-essential python3.13-venv device-tree-compiler openjdk-21-jdk
           sudo modprobe erofs f2fs
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           echo -n "${{ secrets.PLATFORM_KEY_PK8 }}" | base64 --decode > security/platform.pk8
           echo -n "${{ secrets.PLATFORM_KEY_PEM }}" | base64 --decode > security/platform.x509.pem
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '11'
-          cache: gradle
-
       - name: Build all targets
         run: |
-          TARGETS="a51 a52sxq a71 a73xq a53x m52xq r9q r9q2"
+          TARGETS="gts7xlwifi gts7lwifi gts7xl gts7l"
           for target in $TARGETS; do
             echo "==== Building for $target ===="
             source ./buildenv.sh $target
