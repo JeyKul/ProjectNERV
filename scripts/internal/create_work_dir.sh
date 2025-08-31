@@ -16,6 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+
 # [
 source "$SRC_DIR/scripts/utils/build_utils.sh" || exit 1
 
@@ -132,6 +133,26 @@ COPY_TARGET_FIRMWARE()
 }
 
 COPY_TARGET_KERNEL()
+{
+    local MODEL
+    local REGION
+    MODEL=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 1)
+    REGION=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 2)
+
+    mkdir -p "$WORK_DIR/kernel"
+
+    local COMMON_KERNEL_BINS="boot.img dtbo.img vendor_boot.img"
+    for i in $COMMON_KERNEL_BINS; do
+        [ ! -f "$FW_DIR/${MODEL}_${REGION}/$i" ] && continue
+        cp -a --preserve=all "$FW_DIR/${MODEL}_${REGION}/$i" "$WORK_DIR/kernel/$i"
+        $TARGET_KEEP_ORIGINAL_SIGN || bash "$SRC_DIR/scripts/unsign_bin.sh" "$WORK_DIR/kernel/$i" &> /dev/null
+    done
+    if $TARGET_INCLUDE_PATCHED_VBMETA; then
+        cp -a --preserve=all "$FW_DIR/${MODEL}_${REGION}/vbmeta_patched.img" "$WORK_DIR/kernel/vbmeta.img"
+    fi
+}
+
+COPY_TARGET_KERNEL_BK()
 {
     if [ -d "$FW_DIR/$TARGET_FIRMWARE_PATH/kernel" ]; then
         LOG_STEP_IN "- Copying target firmware kernel images"
