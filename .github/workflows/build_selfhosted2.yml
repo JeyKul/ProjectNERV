@@ -1,4 +1,4 @@
-name: Build ProjectNERV (Self-hosted) (bomb)
+name: Build ProjectNERV (Self-hosted)
 
 on:
   workflow_dispatch:
@@ -10,11 +10,8 @@ env:
   ROM_DEST: ~/onedrive/ROMS
 
 jobs:
-  build_target:
+  gts7xlwifi:
     runs-on: self-hosted
-    strategy:
-      matrix:
-        target: [gts7xlwifi, gts7lwifi, gts7xl, gts7l]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -42,8 +39,70 @@ jobs:
 
       - name: Build ROM
         run: |
-          echo "==== Building for ${{ matrix.target }} ===="
-          source ./buildenv.sh ${{ matrix.target }}
+          source ./buildenv.sh gts7xlwifi
           unica make_rom
-          mkdir -p "$ROM_DEST/${{ matrix.target }}"
-          mv out/*.zip "$ROM_DEST/${{ matrix.target }}/"
+          mkdir -p "$ROM_DEST/gts7xlwifi"
+          mv out/*.zip "$ROM_DEST/gts7xlwifi/"
+
+  gts7lwifi:
+    runs-on: self-hosted
+    needs: gts7xlwifi
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Prepare Odin directory
+        run: |
+          mkdir -p out/
+          ln -s ~/odin out/odin || true
+
+      - name: Build ROM
+        run: |
+          source ./buildenv.sh gts7lwifi
+          unica make_rom
+          mkdir -p "$ROM_DEST/gts7lwifi"
+          mv out/*.zip "$ROM_DEST/gts7lwifi/"
+
+  gts7xl:
+    runs-on: self-hosted
+    needs: gts7lwifi
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Prepare Odin directory
+        run: |
+          mkdir -p out/
+          ln -s ~/odin out/odin || true
+
+      - name: Build ROM
+        run: |
+          source ./buildenv.sh gts7xl
+          unica make_rom
+          mkdir -p "$ROM_DEST/gts7xl"
+          mv out/*.zip "$ROM_DEST/gts7xl/"
+
+  gts7l:
+    runs-on: self-hosted
+    needs: gts7xl
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Prepare Odin directory
+        run: |
+          mkdir -p out/
+          ln -s ~/odin out/odin || true
+
+      - name: Build ROM
+        run: |
+          source ./buildenv.sh gts7l
+          unica make_rom
+          mkdir -p "$ROM_DEST/gts7l"
+          mv out/*.zip "$ROM_DEST/gts7l/"
