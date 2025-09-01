@@ -59,6 +59,9 @@ jobs:
             else
               ./scripts/make_rom.sh --no-rom-zip
             fi
+            DEST=~/onedrive/ROMS/$target
+            mkdir -p "$DEST"
+            find out -maxdepth 1 -type f -name "*.zip" -exec cp {} "$DEST/" \;
           done
 
       - name: Upload to GoFile
