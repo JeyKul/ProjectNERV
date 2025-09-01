@@ -1,0 +1,49 @@
+name: Build ProjectNERV (Self-hosted)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'paradigm'
+
+env:
+  ROM_DEST: ~/onedrive/ROMS
+
+jobs:
+  build_target:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        target: [gts7xlwifi, gts7lwifi, gts7xl, gts7l]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Prepare Odin directory
+        run: |
+          mkdir -p out/
+          ln -s ~/odin out/odin || true
+
+      - name: Set up build environment
+        run: |
+          sudo apt update
+          DEBIAN_FRONTEND=noninteractive sudo apt install -yq \
+            p7zip-full jq attr ccache clang ffmpeg golang \
+            libbrotli-dev libgtest-dev libprotobuf-dev libunwind-dev libpcre2-dev \
+            libzstd-dev lld jq protobuf-compiler pcre2-utils webp cmake \
+            curl xxd patchelf flex bison libarchive-tools build-essential python3.13-venv device-tree-compiler openjdk-21-jdk
+          sudo modprobe erofs f2fs
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo -n "${{ secrets.PLATFORM_KEY_PK8 }}" | base64 --decode > security/platform.pk8
+          echo -n "${{ secrets.PLATFORM_KEY_PEM }}" | base64 --decode > security/platform.x509.pem
+
+      - name: Build ROM
+        run: |
+          echo "==== Building for ${{ matrix.target }} ===="
+          source ./buildenv.sh ${{ matrix.target }}
+          unica make_rom
+          mkdir -p "$ROM_DEST/${{ matrix.target }}"
+          mv out/*.zip "$ROM_DEST/${{ matrix.target }}/"
