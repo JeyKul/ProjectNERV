@@ -40,7 +40,7 @@ jobs:
       - name: Build ROM
         run: |
           source ./buildenv.sh gts7xlwifi
-          unica make_rom
+          run_cmd make_rom
           mkdir -p "$ROM_DEST/gts7xlwifi"
           mv out/*.zip "$ROM_DEST/gts7xlwifi/"
 
@@ -61,7 +61,7 @@ jobs:
       - name: Build ROM
         run: |
           source ./buildenv.sh gts7lwifi
-          unica make_rom
+          run_cmd make_rom
           mkdir -p "$ROM_DEST/gts7lwifi"
           mv out/*.zip "$ROM_DEST/gts7lwifi/"
 
@@ -82,7 +82,7 @@ jobs:
       - name: Build ROM
         run: |
           source ./buildenv.sh gts7xl
-          unica make_rom
+          run_cmd make_rom
           mkdir -p "$ROM_DEST/gts7xl"
           mv out/*.zip "$ROM_DEST/gts7xl/"
 
@@ -103,6 +103,6 @@ jobs:
       - name: Build ROM
         run: |
           source ./buildenv.sh gts7l
-          unica make_rom
+          run_cmd make_rom
           mkdir -p "$ROM_DEST/gts7l"
           mv out/*.zip "$ROM_DEST/gts7l/"
