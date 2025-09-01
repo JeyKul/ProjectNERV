@@ -6,9 +6,6 @@ on:
     branches:
       - 'paradigm'
 
-env:
-  ROM_DEST: ~/onedrive/ROMS
-
 jobs:
   gts7xlwifi:
     runs-on: self-hosted
@@ -41,8 +38,8 @@ jobs:
         run: |
           source ./buildenv.sh gts7xlwifi
           run_cmd make_rom
-          mkdir -p "$ROM_DEST/gts7xlwifi"
-          mv out/*.zip "$ROM_DEST/gts7xlwifi/"
+          mkdir -p "~/onedrive/gts7xlwifi/$(date +%m.%d.%Y)"
+          mv out/*.zip "~/onedrive/gts7xlwifi/$(date +%m.%d.%Y)/"
 
   gts7lwifi:
     runs-on: self-hosted
@@ -62,8 +59,8 @@ jobs:
         run: |
           source ./buildenv.sh gts7lwifi
           run_cmd make_rom
-          mkdir -p "$ROM_DEST/gts7lwifi"
-          mv out/*.zip "$ROM_DEST/gts7lwifi/"
+          mkdir -p "~/onedrive/gts7lwifi/$(date +%m.%d.%Y)"
+          mv out/*.zip "~/onedrive/gts7lwifi/$(date +%m.%d.%Y)/"
 
   gts7xl:
     runs-on: self-hosted
@@ -83,8 +80,8 @@ jobs:
         run: |
           source ./buildenv.sh gts7xl
           run_cmd make_rom
-          mkdir -p "$ROM_DEST/gts7xl"
-          mv out/*.zip "$ROM_DEST/gts7xl/"
+          mkdir -p "~/onedrive/gts7xl/$(date +%m.%d.%Y)"
+          mv out/*.zip "~/onedrive/gts7xl/$(date +%m.%d.%Y)/"
 
   gts7l:
     runs-on: self-hosted
@@ -104,5 +101,5 @@ jobs:
         run: |
           source ./buildenv.sh gts7l
           run_cmd make_rom
-          mkdir -p "$ROM_DEST/gts7l"
-          mv out/*.zip "$ROM_DEST/gts7l/"
+          mkdir -p "~/onedrive/gts7l/$(date +%m.%d.%Y)"
+          mv out/*.zip "~/onedrive/gts7l/$(date +%m.%d.%Y)/"
