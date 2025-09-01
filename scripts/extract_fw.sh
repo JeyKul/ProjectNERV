@@ -258,6 +258,17 @@ STORE_KERNEL_IMAGE_METADATA()
             EVAL "unpack_bootimg --boot_img \"$FW_DIR/${MODEL}_${CSC}/kernel/$f\" --out \"$TMP_DIR\""
             exit 1
         fi
+
+    while [ "$#" != 0 ]; do
+        if [[ "$1" == "--force" ]] || [[ "$1" == "-f" ]]; then
+            FORCE=true
+        elif [[ "$1" == "--ignore-source" ]]; then
+            IGNORE_SOURCE=true
+        elif [[ "$1" == "--ignore-target" ]]; then
+            IGNORE_TARGET=true
+        elif [[ "$1" == "-"* ]]; then
+            LOGE "Unknown option: $1"
+            PRINT_USAGE
         rm -rf "$TMP_DIR/"*
 
         while IFS= read -r l; do
@@ -423,9 +434,10 @@ for i in "${FIRMWARES[@]}"; do
 
     echo -n "$DOWNLOADED_FIRMWARE" > "$FW_DIR/${MODEL}_${CSC}/.extracted"
 
-    if [ -n "$GITHUB_ACTIONS" ] && [ "$RUNNER_NAME" != "self-hosted" ]; then
+    if [ -n "$GITHUB_ACTIONS" ] && [ "$RUNNER_ENVIRONMENT" != "self-hosted" ]; then
         rm -rf "$ODIN_DIR/${MODEL}_${CSC}"
     fi
+
 
     LOG_STEP_OUT; LOG_STEP_OUT
 done
