@@ -157,7 +157,7 @@ if $BUILD_ROM; then
     echo -n "$(GET_WORK_DIR_HASH)" > "$WORK_DIR/.completed"
 fi
 
-if [ -n "$GITHUB_ACTIONS" ]; then
+if [ -n "$GITHUB_ACTIONS" && [ "$RUNNER_ENVIRONMENT" != "self-hosted" ]; then
     rm -rf "$FW_DIR"
 fi
 
