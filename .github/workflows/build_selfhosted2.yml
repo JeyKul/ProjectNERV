@@ -1,4 +1,4 @@
-name: Build ProjectNERV (Self-hosted)
+name: Build ProjectNERV (Self-hosted) (bomb)
 
 on:
   workflow_dispatch:
