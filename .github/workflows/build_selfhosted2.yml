@@ -1,4 +1,4 @@
-name: Build ProjectNERV (Self-hosted)
+name: Build TerracottaROM (all devices)
 
 on:
   workflow_dispatch:
