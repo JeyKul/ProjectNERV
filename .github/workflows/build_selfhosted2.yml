@@ -17,8 +17,10 @@ jobs:
 
       - name: Prepare Odin directory
         run: |
-          mkdir -p out/
-          ln -s ~/odin out/odin || true
+          mkdir -p /home/nerv/fw
+          mkdir -p /home/nerv/odin
+          ln -s /home/nerv/odin out/odin || true
+          ln -s /home/nerv/fw out/fw || true
 
       - name: Set up build environment
         run: |
@@ -38,8 +40,11 @@ jobs:
         run: |
           source ./buildenv.sh gts7xlwifi
           run_cmd make_rom
-          mkdir -p "~/onedrive/gts7xlwifi/$(date +%m.%d.%Y)"
-          mv out/*.zip "~/onedrive/gts7xlwifi/$(date +%m.%d.%Y)/"
+
+      - name: Upload ROM
+        run: |
+          mkdir -p "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)"
+          mv out/*.zip "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
 
   gts7lwifi:
     runs-on: self-hosted
@@ -52,15 +57,20 @@ jobs:
 
       - name: Prepare Odin directory
         run: |
-          mkdir -p out/
-          ln -s ~/odin out/odin || true
+          mkdir -p /home/nerv/fw
+          mkdir -p /home/nerv/odin
+          ln -s /home/nerv/odin out/odin || true
+          ln -s /home/nerv/fw out/fw || true
 
       - name: Build ROM
         run: |
           source ./buildenv.sh gts7lwifi
           run_cmd make_rom
-          mkdir -p "~/onedrive/gts7lwifi/$(date +%m.%d.%Y)"
-          mv out/*.zip "~/onedrive/gts7lwifi/$(date +%m.%d.%Y)/"
+
+      - name: Upload ROM
+        run: |
+          mkdir -p "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)"
+          mv out/*.zip "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
 
   gts7xl:
     runs-on: self-hosted
@@ -73,15 +83,20 @@ jobs:
 
       - name: Prepare Odin directory
         run: |
-          mkdir -p out/
-          ln -s ~/odin out/odin || true
+          mkdir -p /home/nerv/fw
+          mkdir -p /home/nerv/odin
+          ln -s /home/nerv/odin out/odin || true
+          ln -s /home/nerv/fw out/fw || true
 
       - name: Build ROM
         run: |
-          source ./buildenv.sh gts7xl
+          source ./buildenv.sh gts7l
           run_cmd make_rom
-          mkdir -p "~/onedrive/gts7xl/$(date +%m.%d.%Y)"
-          mv out/*.zip "~/onedrive/gts7xl/$(date +%m.%d.%Y)/"
+
+      - name: Upload ROM
+        run: |
+          mkdir -p "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)"
+          mv out/*.zip "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
 
   gts7l:
     runs-on: self-hosted
@@ -94,12 +109,17 @@ jobs:
 
       - name: Prepare Odin directory
         run: |
-          mkdir -p out/
-          ln -s ~/odin out/odin || true
+          mkdir -p /home/nerv/fw
+          mkdir -p /home/nerv/odin
+          ln -s /home/nerv/odin out/odin || true
+          ln -s /home/nerv/fw out/fw || true
 
       - name: Build ROM
         run: |
           source ./buildenv.sh gts7l
           run_cmd make_rom
-          mkdir -p "~/onedrive/gts7l/$(date +%m.%d.%Y)"
-          mv out/*.zip "~/onedrive/gts7l/$(date +%m.%d.%Y)/"
+
+      - name: Upload ROM
+        run: |
+          mkdir -p "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)"
+          mv out/*.zip "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
