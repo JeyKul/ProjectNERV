@@ -17,17 +17,13 @@ jobs:
 
       - name: Prepare Symlinks
         run: |
-          mkdir -p out/odin
-          mkdir -p out/fw
-          mkdir -p /home/nerv/out/fw
-          mkdir -p /home/nerv/out/odin
+          rm -rf out/odin out/fw out/tools
           ln -s /home/nerv/out/odin out/odin || true
           ln -s /home/nerv/out/fw out/fw || true
 
       - name: Prepare tools (1x rebuild)
         run: |
              rm -rf /home/nerv/out/tools
-             mkdir -p /home/nerv/out/tools
              mkdir -p out/tools
              ln -s /home/nerv/out/tools out/tools
 
