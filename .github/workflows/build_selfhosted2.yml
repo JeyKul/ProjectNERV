@@ -15,8 +15,10 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Prepare Odin directory
+      - name: Prepare Symlinks
         run: |
+          mkdir -p out/odin
+          mkdir -p out/fw
           mkdir -p /home/nerv/fw
           mkdir -p /home/nerv/odin
           ln -s /home/nerv/odin out/odin || true
@@ -55,8 +57,10 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Prepare Odin directory
+      - name: Prepare Symlinks
         run: |
+          mkdir -p out/odin
+          mkdir -p out/fw
           mkdir -p /home/nerv/fw
           mkdir -p /home/nerv/odin
           ln -s /home/nerv/odin out/odin || true
@@ -69,8 +73,8 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mkdir -p "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)"
-          mv out/*.zip "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
+          mkdir -p "/home/nerv/onedrive/ROMS/gts7xlwifi/$(date +%m.%d.%Y)"
+          mv out/*.zip "/home/nerv/onedrive/ROMS/gts7xlwifi/$(date +%m.%d.%Y)/"
 
   gts7xl:
     runs-on: self-hosted
@@ -81,8 +85,10 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Prepare Odin directory
+      - name: Prepare Symlinks
         run: |
+          mkdir -p out/odin
+          mkdir -p out/fw
           mkdir -p /home/nerv/fw
           mkdir -p /home/nerv/odin
           ln -s /home/nerv/odin out/odin || true
@@ -95,8 +101,8 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mkdir -p "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)"
-          mv out/*.zip "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
+          mkdir -p "/home/nerv/onedrive/ROMS/gts7xl/$(date +%m.%d.%Y)"
+          mv out/*.zip "/home/nerv/onedrive/ROMS/gts7xl/$(date +%m.%d.%Y)/"
 
   gts7l:
     runs-on: self-hosted
@@ -107,8 +113,10 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Prepare Odin directory
+      - name: Prepare Symlinks
         run: |
+          mkdir -p out/odin
+          mkdir -p out/fw
           mkdir -p /home/nerv/fw
           mkdir -p /home/nerv/odin
           ln -s /home/nerv/odin out/odin || true
@@ -121,5 +129,5 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mkdir -p "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)"
-          mv out/*.zip "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
+          mkdir -p "/home/nerv/onedrive/ROMS/$TARGET_CODENAME/$(date +%m.%d.%Y)"
+          mv out/*.zip "/home/nerv/onedrive/ROMS/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
