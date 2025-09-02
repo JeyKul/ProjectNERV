@@ -26,6 +26,7 @@ jobs:
       - name: Prepare tools (1x rebuild)
         run: |
              rm -rf /home/nerv/out/tools
+             mkdir /home/nerv/out/tools
              ln -s /home/nerv/out/tools out/tools
 
       - name: Set up build environment
