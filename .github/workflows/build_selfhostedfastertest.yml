@@ -42,6 +42,6 @@ jobs:
           touch out/test.blob
       - name: Upload ROM
         run: |
-          mkdir -p "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)"
-          mv out/test.blob "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
+          mkdir -p "/home/nerv/onedrive/ROMS/gts7xlwifi/$(date +%m.%d.%Y)"
+          mv out/test.blob "/home/nerv/onedrive/gts7xlwifi/$(date +%m.%d.%Y)/"
 
