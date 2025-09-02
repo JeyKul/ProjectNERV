@@ -18,6 +18,7 @@ jobs:
       - name: Prepare Symlinks
         run: |
           mkdir -p /home/nerv/out/tools /home/nerv/out/fw /home/nerv/out/odin
+          mkdir out
           rm -rf out/odin out/fw out/tools
           ln -s /home/nerv/out/odin out/odin || true
           ln -s /home/nerv/out/fw out/fw || true
@@ -25,7 +26,6 @@ jobs:
       - name: Prepare tools (1x rebuild)
         run: |
              rm -rf /home/nerv/out/tools
-             mkdir -p out/tools
              ln -s /home/nerv/out/tools out/tools
 
       - name: Set up build environment
@@ -63,18 +63,12 @@ jobs:
 
       - name: Prepare Symlinks
         run: |
-          mkdir -p out/odin
-          mkdir -p out/fw
-          mkdir -p /home/nerv/out/fw
-          mkdir -p /home/nerv/out/odin
+          mkdir -p /home/nerv/out/tools /home/nerv/out/fw /home/nerv/out/odin
+          mkdir out
+          rm -rf out/odin out/fw out/tools
           ln -s /home/nerv/out/odin out/odin || true
           ln -s /home/nerv/out/fw out/fw || true
-
-      - name: Prepare tools
-        run: |
-             mkdir -p /home/nerv/out/tools
-             mkdir -p out/tools
-             ln -s /home/nerv/out/tools
+          ln -s /home/nerv/out/tools out/tools
 
       - name: Build ROM
         run: |
@@ -97,18 +91,12 @@ jobs:
 
       - name: Prepare Symlinks
         run: |
-          mkdir -p out/odin
-          mkdir -p out/fw
-          mkdir -p /home/nerv/out/fw
-          mkdir -p /home/nerv/out/odin
+          mkdir -p /home/nerv/out/tools /home/nerv/out/fw /home/nerv/out/odin
+          mkdir out
+          rm -rf out/odin out/fw out/tools
           ln -s /home/nerv/out/odin out/odin || true
           ln -s /home/nerv/out/fw out/fw || true
-
-      - name: Prepare tools
-        run: |
-             mkdir -p /home/nerv/out/tools
-             mkdir -p out/tools
-             ln -s /home/nerv/out/tools
+          ln -s /home/nerv/out/tools out/tools
 
       - name: Build ROM
         run: |
@@ -131,18 +119,12 @@ jobs:
 
       - name: Prepare Symlinks
         run: |
-          mkdir -p out/odin
-          mkdir -p out/fw
-          mkdir -p /home/nerv/out/fw
-          mkdir -p /home/nerv/out/odin
+          mkdir -p /home/nerv/out/tools /home/nerv/out/fw /home/nerv/out/odin
+          mkdir out
+          rm -rf out/odin out/fw out/tools
           ln -s /home/nerv/out/odin out/odin || true
           ln -s /home/nerv/out/fw out/fw || true
-
-      - name: Prepare tools
-        run: |
-             mkdir -p /home/nerv/out/tools
-             mkdir -p out/tools
-             ln -s /home/nerv/out/tools
+          ln -s /home/nerv/out/tools out/tools
 
       - name: Build ROM
         run: |
