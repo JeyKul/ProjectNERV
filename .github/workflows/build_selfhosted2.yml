@@ -50,7 +50,7 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mega-put -c out/*.zip "TerracottaROM/gts7xlwifi/$(date +%m.%d.%Y)"
+          mega-put -c out/*.zip "TerracottaROM/gts7xlwifi/$(date +%m.%d.%Y)/"
           rm -rf out/target out/*.zip
 
   gts7lwifi:
@@ -78,7 +78,7 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mega-put -c out/*.zip "TerracottaROM/gts7lwifi/$(date +%m.%d.%Y)"
+          mega-put -c out/*.zip "TerracottaROM/gts7lwifi/$(date +%m.%d.%Y)/"
           rm -rf out/target out/*.zip
 
   gts7xl:
@@ -106,7 +106,7 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mega-put -c out/*.zip "TerracottaROM/gts7xl/$(date +%m.%d.%Y)"
+          mega-put -c out/*.zip "TerracottaROM/gts7xl/$(date +%m.%d.%Y)/"
           rm -rf out/target out/*.zip
 
   gts7l:
@@ -134,5 +134,5 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mega-put -c out/*.zip "TerracottaROM/gts7l/$(date +%m.%d.%Y)"
+          mega-put -c out/*.zip "TerracottaROM/gts7l/$(date +%m.%d.%Y)/"
           rm -rf out/target out/*.zip
