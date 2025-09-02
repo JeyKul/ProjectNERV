@@ -19,10 +19,17 @@ jobs:
         run: |
           mkdir -p out/odin
           mkdir -p out/fw
-          mkdir -p /home/nerv/fw
-          mkdir -p /home/nerv/odin
-          ln -s /home/nerv/odin out/odin || true
-          ln -s /home/nerv/fw out/fw || true
+          mkdir -p /home/nerv/out/fw
+          mkdir -p /home/nerv/out/odin
+          ln -s /home/nerv/out/odin out/odin || true
+          ln -s /home/nerv/out/fw out/fw || true
+
+      - name: Prepare tools (1x rebuild)
+        run: |
+             rm -rf /home/nerv/out/tools
+             mkdir -p /home/nerv/out/tools
+             mkdir -p out/tools
+             ln -s /home/nerv/out/tools
 
       - name: Set up build environment
         run: |
@@ -61,10 +68,16 @@ jobs:
         run: |
           mkdir -p out/odin
           mkdir -p out/fw
-          mkdir -p /home/nerv/fw
-          mkdir -p /home/nerv/odin
-          ln -s /home/nerv/odin out/odin || true
-          ln -s /home/nerv/fw out/fw || true
+          mkdir -p /home/nerv/out/fw
+          mkdir -p /home/nerv/out/odin
+          ln -s /home/nerv/out/odin out/odin || true
+          ln -s /home/nerv/out/fw out/fw || true
+
+      - name: Prepare tools
+        run: |
+             mkdir -p /home/nerv/out/tools
+             mkdir -p out/tools
+             ln -s /home/nerv/out/tools
 
       - name: Build ROM
         run: |
@@ -89,10 +102,16 @@ jobs:
         run: |
           mkdir -p out/odin
           mkdir -p out/fw
-          mkdir -p /home/nerv/fw
-          mkdir -p /home/nerv/odin
-          ln -s /home/nerv/odin out/odin || true
-          ln -s /home/nerv/fw out/fw || true
+          mkdir -p /home/nerv/out/fw
+          mkdir -p /home/nerv/out/odin
+          ln -s /home/nerv/out/odin out/odin || true
+          ln -s /home/nerv/out/fw out/fw || true
+
+      - name: Prepare tools
+        run: |
+             mkdir -p /home/nerv/out/tools
+             mkdir -p out/tools
+             ln -s /home/nerv/out/tools
 
       - name: Build ROM
         run: |
@@ -117,10 +136,16 @@ jobs:
         run: |
           mkdir -p out/odin
           mkdir -p out/fw
-          mkdir -p /home/nerv/fw
-          mkdir -p /home/nerv/odin
-          ln -s /home/nerv/odin out/odin || true
-          ln -s /home/nerv/fw out/fw || true
+          mkdir -p /home/nerv/out/fw
+          mkdir -p /home/nerv/out/odin
+          ln -s /home/nerv/out/odin out/odin || true
+          ln -s /home/nerv/out/fw out/fw || true
+
+      - name: Prepare tools
+        run: |
+             mkdir -p /home/nerv/out/tools
+             mkdir -p out/tools
+             ln -s /home/nerv/out/tools
 
       - name: Build ROM
         run: |
