@@ -17,6 +17,8 @@ jobs:
 
       - name: Prepare Odin directory
         run: |
+          mkdir -p out/odin
+          mkdir -p out/fw
           mkdir -p /home/nerv/fw
           mkdir -p /home/nerv/odin
           ln -s /home/nerv/odin out/odin || true
