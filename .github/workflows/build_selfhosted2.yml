@@ -49,8 +49,8 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mkdir -p "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)"
-          mv out/*.zip "/home/nerv/onedrive/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
+          mega-put -c out/*.zip "TerracottaROM/gts7xlwifi/$(date +%m.%d.%Y)"
+          rm -rf out/target out/*.zip
 
   gts7lwifi:
     runs-on: self-hosted
@@ -83,8 +83,8 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mkdir -p "/home/nerv/onedrive/ROMS/gts7xlwifi/$(date +%m.%d.%Y)"
-          mv out/*.zip "/home/nerv/onedrive/ROMS/gts7xlwifi/$(date +%m.%d.%Y)/"
+          mega-put -c out/*.zip "TerracottaROM/gts7lwifi/$(date +%m.%d.%Y)"
+          rm -rf out/target out/*.zip
 
   gts7xl:
     runs-on: self-hosted
@@ -117,8 +117,8 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mkdir -p "/home/nerv/onedrive/ROMS/gts7xl/$(date +%m.%d.%Y)"
-          mv out/*.zip "/home/nerv/onedrive/ROMS/gts7xl/$(date +%m.%d.%Y)/"
+          mega-put -c out/*.zip "TerracottaROM/gts7xl/$(date +%m.%d.%Y)"
+          rm -rf out/target out/*.zip
 
   gts7l:
     runs-on: self-hosted
@@ -151,5 +151,5 @@ jobs:
 
       - name: Upload ROM
         run: |
-          mkdir -p "/home/nerv/onedrive/ROMS/$TARGET_CODENAME/$(date +%m.%d.%Y)"
-          mv out/*.zip "/home/nerv/onedrive/ROMS/$TARGET_CODENAME/$(date +%m.%d.%Y)/"
+          mega-put -c out/*.zip "TerracottaROM/gts7l/$(date +%m.%d.%Y)"
+          rm -rf out/target out/*.zip
