@@ -1,0 +1,138 @@
+name: Build TerracottaROM (all devices)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'paradigm'
+
+jobs:
+  gts7xlwifi:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Prepare Symlinks
+        run: |
+              mkdir -p /home/nerv/out/tools /home/nerv/out/fw /home/nerv/out/odin
+              mkdir out
+              rm -rf out/odin out/fw out/tools
+              ln -s /home/nerv/out/odin out/odin || true
+              ln -s /home/nerv/out/fw out/fw || true
+
+      - name: Prepare tools (1x rebuild)
+        run: |
+             rm -rf /home/nerv/out/tools
+             mkdir /home/nerv/out/tools
+             ln -s /home/nerv/out/tools out/tools
+
+      - name: Set up build environment
+        run: |
+             sudo apt update
+             DEBIAN_FRONTEND=noninteractive sudo apt install -yq \
+             p7zip-full jq attr ccache clang ffmpeg golang \
+             libbrotli-dev libgtest-dev libprotobuf-dev libunwind-dev libpcre2-dev \
+             libzstd-dev lld jq protobuf-compiler pcre2-utils webp cmake \
+             curl xxd patchelf flex bison libarchive-tools build-essential python3.13-venv device-tree-compiler openjdk-21-jdk
+             sudo modprobe erofs f2fs
+             git config --global user.name "github-actions[bot]"
+             git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+             echo -n "${{ secrets.PLATFORM_KEY_PK8 }}" | base64 --decode > security/platform.pk8
+             echo -n "${{ secrets.PLATFORM_KEY_PEM }}" | base64 --decode > security/platform.x509.pem
+
+      - name: Build ROM
+        run: |
+             source ./buildenv.sh gts7xlwifi
+             run_cmd make_rom
+
+      - name: Upload ROM
+        run: |
+             mega-put -c out/*.zip "TerracottaROM/gts7xlwifi/$(date +%m.%d.%Y)/"
+             rm -rf out/target out/*.zip
+
+  gts7lwifi:
+    runs-on: self-hosted
+    needs: gts7xlwifi
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Prepare Symlinks
+        run: |
+             mkdir -p /home/nerv/out/tools /home/nerv/out/fw /home/nerv/out/odin
+             mkdir out
+             rm -rf out/odin out/fw out/tools
+             ln -s /home/nerv/out/odin out/odin || true
+             ln -s /home/nerv/out/fw out/fw || true
+             ln -s /home/nerv/out/tools out/tools
+
+      - name: Build ROM
+        run: |
+             source ./buildenv.sh gts7lwifi
+             run_cmd make_rom
+
+      - name: Upload ROM
+        run: |
+             mega-put -c out/*.zip "TerracottaROM/gts7lwifi/$(date +%m.%d.%Y)/"
+             rm -rf out/target out/*.zip
+
+  gts7xl:
+    runs-on: self-hosted
+    needs: gts7lwifi
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Prepare Symlinks
+        run: |
+             mkdir -p /home/nerv/out/tools /home/nerv/out/fw /home/nerv/out/odin
+             mkdir out
+             rm -rf out/odin out/fw out/tools
+             ln -s /home/nerv/out/odin out/odin
+             ln -s /home/nerv/out/fw out/fw
+             ln -s /home/nerv/out/tools out/tools
+
+      - name: Build ROM
+        run: |
+             source ./buildenv.sh gts7xl
+             run_cmd make_rom
+
+      - name: Upload ROM
+        run: |
+             mega-put -c out/*.zip "TerracottaROM/gts7xl/$(date +%m.%d.%Y)/"
+             rm -rf out/target out/*.zip
+
+  gts7l:
+    runs-on: self-hosted
+    needs: gts7xl
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Prepare Symlinks
+        run: |
+             mkdir -p /home/nerv/out/tools /home/nerv/out/fw /home/nerv/out/odin
+             mkdir out
+             rm -rf out/odin out/fw out/tools
+             ln -s /home/nerv/out/odin out/odin || true
+             ln -s /home/nerv/out/fw out/fw || true
+             ln -s /home/nerv/out/tools out/tools
+
+      - name: Build ROM
+        run: |
+             source ./buildenv.sh gts7l
+             run_cmd make_rom
+
+      - name: Upload ROM
+        run: |
+             mega-put -c out/*.zip "TerracottaROM/gts7l/$(date +%m.%d.%Y)/"
+             rm -rf out/target out/*.zip
