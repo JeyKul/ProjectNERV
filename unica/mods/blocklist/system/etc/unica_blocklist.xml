@@ -3,8 +3,4 @@
     <package name="com.aura.oobe.samsung"/>
     <package name="com.aura.oobe.samsung.gl"/>
     <package name="com.ironsource.appcloud.oobe.hutchison"/>
-    <package name="com.pubg.imobile"/>
-    <package name="com.roblox.client"/>
-    <package name="com.tencent.ig"/>
-    <package name="com.zhiliaoapp.musically.go"/>
 </packages>
