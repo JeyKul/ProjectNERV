@@ -1,14 +1,16 @@
-From 7c1a8a511d4d890f80a6a16efe837577f2718d2c Mon Sep 17 00:00:00 2001
+From 021e7521c6a6c832d5fabec5c99ee6fa5d08a983 Mon Sep 17 00:00:00 2001
 From: Salvo Giangreco <giangrecosalvo9@gmail.com>
-Date: Sat, 6 Sep 2025 18:53:47 +0200
+Date: Wed, 3 Sep 2025 10:49:20 +0200
 Subject: [PATCH] Allow custom PackageBlockListPolicy
 
 ---
  .../server/pm/InstallPackageHelper.smali      | 14 ++--
  .../android/server/pm/ScanPackageUtils.smali  | 10 +--
+ .../pm/install/PackageBlockListPolicy$1.smali | 48 --------------
  .../pm/install/PackageBlockListPolicy.smali   | 20 +-----
  .../server/pm/lifecycle/PmLifecycleImpl.smali | 64 ++-----------------
- 4 files changed, 18 insertions(+), 90 deletions(-)
+ 5 files changed, 18 insertions(+), 138 deletions(-)
+ delete mode 100644 smali_classes2/com/samsung/android/server/pm/install/PackageBlockListPolicy$1.smali
 
 diff --git a/smali_classes2/com/android/server/pm/InstallPackageHelper.smali b/smali_classes2/com/android/server/pm/InstallPackageHelper.smali
 index 187451f..f9c1c12 100644
@@ -94,6 +96,60 @@ index e57e5e8..78ca975 100644
  
      invoke-virtual {v9, v0}, Ljava/util/HashSet;->contains(Ljava/lang/Object;)Z
  
+diff --git a/smali_classes2/com/samsung/android/server/pm/install/PackageBlockListPolicy$1.smali b/smali_classes2/com/samsung/android/server/pm/install/PackageBlockListPolicy$1.smali
+deleted file mode 100644
+index b5aa40f..0000000
+--- a/smali_classes2/com/samsung/android/server/pm/install/PackageBlockListPolicy$1.smali
++++ /dev/null
+@@ -1,48 +0,0 @@
+-.class public final Lcom/samsung/android/server/pm/install/PackageBlockListPolicy$1;
+-.super Landroid/database/ContentObserver;
+-.source "qb/99735591 504aace1a941a954f133efe1b976b95ba80465494099c7e63a0b7ea099683e06"
+-
+-
+-# instance fields
+-.field public final synthetic val$cr:Landroid/content/ContentResolver;
+-
+-
+-# direct methods
+-.method public constructor <init>(Landroid/os/Handler;Landroid/content/ContentResolver;)V
+-    .locals 0
+-
+-    iput-object p2, p0, Lcom/samsung/android/server/pm/install/PackageBlockListPolicy$1;->val$cr:Landroid/content/ContentResolver;
+-
+-    invoke-direct {p0, p1}, Landroid/database/ContentObserver;-><init>(Landroid/os/Handler;)V
+-
+-    return-void
+-.end method
+-
+-
+-# virtual methods
+-.method public final onChange(Z)V
+-    .locals 2
+-
+-    sget-object p1, Lcom/samsung/android/server/pm/install/PackageBlockListPolicy;->sIsRduDevice:Ljava/util/concurrent/atomic/AtomicBoolean;
+-
+-    iget-object p0, p0, Lcom/samsung/android/server/pm/install/PackageBlockListPolicy$1;->val$cr:Landroid/content/ContentResolver;
+-
+-    const-string/jumbo v0, "shopdemo"
+-
+-    const/4 v1, 0x0
+-
+-    invoke-static {p0, v0, v1}, Landroid/provider/Settings$Secure;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+-
+-    move-result p0
+-
+-    const/4 v0, 0x1
+-
+-    if-ne p0, v0, :cond_0
+-
+-    move v1, v0
+-
+-    :cond_0
+-    invoke-virtual {p1, v1}, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
+-
+-    return-void
+-.end method
 diff --git a/smali_classes2/com/samsung/android/server/pm/install/PackageBlockListPolicy.smali b/smali_classes2/com/samsung/android/server/pm/install/PackageBlockListPolicy.smali
 index d48d8d8..2f6a98b 100644
 --- a/smali_classes2/com/samsung/android/server/pm/install/PackageBlockListPolicy.smali
