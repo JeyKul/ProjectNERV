@@ -1,0 +1,29 @@
+From 3cf5b8de8042a032d7c83eadd13b027dd1b1a9d9 Mon Sep 17 00:00:00 2001
+From: Bahar KURT <kurtbahartr@users.noreply.github.com>
+Date: Sat, 28 Jun 2025 04:24:09 -0400
+Subject: [PATCH 1/2] Set FP_FEATURE_SENSOR_IS_OPTICAL to false
+
+Based on ExtremeXT's work on FP_FEATURE_SENSOR_IS_ULTRASONIC for
+QSSI base.
+
+Co-authored-by: ExtremeXT <75576145+ExtremeXT@users.noreply.github.com>
+---
+ smali/com/android/server/biometrics/SemBiometricFeature.smali | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/smali/com/android/server/biometrics/SemBiometricFeature.smali b/smali/com/android/server/biometrics/SemBiometricFeature.smali
+index 1e9e54e6..db47891d 100644
+--- a/smali/com/android/server/biometrics/SemBiometricFeature.smali
++++ b/smali/com/android/server/biometrics/SemBiometricFeature.smali
+@@ -161,7 +161,7 @@
+ 
+     sput-boolean v2, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_IN_DISPLAY_TYPE:Z
+ 
+-    sput-boolean v2, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_OPTICAL:Z
++    sput-boolean v3, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_OPTICAL:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-- 
+2.43.0
+
