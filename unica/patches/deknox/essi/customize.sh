@@ -1,3 +1,7 @@
+if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "self" ]]; then
+    return 0
+fi
+
 SET_FLOATING_FEATURE_CONFIG "SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_BLOCKCHAIN_SERVICE" --delete
 
 ADD_TO_WORK_DIR "gts9fexx" "system" "system/bin" 0 2000 751 "u:object_r:system_file:s0"
