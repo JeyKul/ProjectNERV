@@ -414,3 +414,10 @@ if [ ! -f "$FW_DIR/${MODEL}_${REGION}/vendor/etc/permissions/android.hardware.st
     APPLY_PATCH "system" "system/framework/framework.jar" "$SRC_DIR/unica/patches/product_feature/strongbox/framework.jar/0001-Disable-StrongBox-in-DevRootKeyATCmd.patch"
     LOG_STEP_OUT
 fi
+
+if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "tssi" ]]; then
+    LOG_STEP_IN "- Applying Display Quality"
+    APPLY_PATCH "system" "system/framework/framework.jar" "$SRC_DIR/unica/patches/product_feature/displayquality/framework.jar/0001-Nuke_Displayquality.patch"
+    APPLY_PATCH "system" "system/framework/services.jar" "$SRC_DIR/unica/patches/product_feature/displayquality/services.jar/0001-Nuke_Displayquality.patch"
+    LOG_STEP_OUT
+fi
