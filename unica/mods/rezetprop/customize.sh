@@ -11,7 +11,10 @@ LOG "- Applying prop spoofer"
     echo ""
 } >> "$WORK_DIR/system/system/etc/init/hw/init.rc"
 
-sed -i 's/${ro.boot.warranty_bit}/0/g' "$WORK_DIR/system/system/etc/init/init.rilcommon.rc"
+if [[ -f "$WORK_DIR/system/system/etc/init/init.rilcommon.rc" ]]; then
+    sed -i 's/${ro.boot.warranty_bit}/0/g' \
+        "$WORK_DIR/system/system/etc/init/init.rilcommon.rc"
+fi
 
 LINES="$(sed -n "/^(allow init init_exec\b/=" "$WORK_DIR/system/system/etc/selinux/plat_sepolicy.cil")"
 for l in $LINES; do
