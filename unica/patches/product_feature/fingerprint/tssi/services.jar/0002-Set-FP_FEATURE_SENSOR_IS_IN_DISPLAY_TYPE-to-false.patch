@@ -1,25 +1,37 @@
-From 1c13435c11c47a98ba210786994b6392e1607d9b Mon Sep 17 00:00:00 2001
-From: ExtremeXT <75576145+ExtremeXT@users.noreply.github.com>
-Date: Tue, 22 Apr 2025 23:06:11 +0300
+From 273b67ff5b3ba931da9862e410e7d29e1922839b Mon Sep 17 00:00:00 2001
+From: JeyKul <jey@kulovac.de>, ExtremeXT
+Date: Sat, 13 Sep 2025 13:48:02 +0200
 Subject: [PATCH] Set FP_FEATURE_SENSOR_IS_IN_DISPLAY_TYPE to false
 
 ---
- smali/com/android/server/biometrics/SemBiometricFeature.smali | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../com/android/server/biometrics/SemBiometricFeature.smali | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/smali/com/android/server/biometrics/SemBiometricFeature.smali b/smali/com/android/server/biometrics/SemBiometricFeature.smali
-index fc03955f..4090cd12 100644
+index bf3c450..4a3d5f4 100644
 --- a/smali/com/android/server/biometrics/SemBiometricFeature.smali
 +++ b/smali/com/android/server/biometrics/SemBiometricFeature.smali
-@@ -161,7 +161,7 @@
+@@ -161,9 +161,9 @@
  
      sput-boolean v0, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_USE_AOSP_HAL:Z
  
--    sput-boolean v2, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_IN_DISPLAY_TYPE:Z
-+    sput-boolean v3, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_IN_DISPLAY_TYPE:Z
+-    sput-boolean v3, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_IN_DISPLAY_TYPE:Z
++    sput-boolean v0, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_IN_DISPLAY_TYPE:Z
+ 
+-    sput-boolean v3, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_OPTICAL:Z
++    sput-boolean v0, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_OPTICAL:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+@@ -197,7 +197,7 @@
+ 
+     move-result v0
+ 
+-    sput-boolean v0, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_SIDE:Z
++    sput-boolean v3, Lcom/android/server/biometrics/SemBiometricFeature;->FP_FEATURE_SENSOR_IS_SIDE:Z
  
      invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
  
 -- 
-2.45.2
+2.47.2
 
