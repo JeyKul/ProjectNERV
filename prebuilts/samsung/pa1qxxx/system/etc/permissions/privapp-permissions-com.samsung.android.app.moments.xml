@@ -3,6 +3,5 @@
         <privapp-permissions package="com.samsung.android.app.moments">
             <permission name="android.permission.REAL_GET_TASKS"/>
 			<permission name="android.permission.SCHEDULE_EXACT_ALARM"/>
-			<permission name="android.permission.START_ACTIVITIES_FROM_BACKGROUND"/>
         </privapp-permissions>
 </permissions>

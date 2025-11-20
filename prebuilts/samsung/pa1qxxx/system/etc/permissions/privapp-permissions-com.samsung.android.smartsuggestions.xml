@@ -112,6 +112,8 @@
 		<permission name="com.samsung.android.permission.SEM_BATTERY_INFO"/>
 		<permission name="android.permission.BATTERY_STATS"/>
 		<permission name="android.permission.ACCESS_NOTIFICATIONS"/>
-        <permission name="android.permission.READ_SEARCH_INDEXABLES" />
+		<permission name="com.samsung.android.app.cocktailbarservice.permission.ACCESS_PANEL" />
+		<permission name="android.permission.READ_SEARCH_INDEXABLES" />
+        <permission name="android.permission.START_TASKS_FROM_RECENTS" />
     </privapp-permissions>
 </permissions>

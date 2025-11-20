@@ -454,13 +454,17 @@
 	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.rms.retailagent.global" />
 	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.android.sdk.ocr" />
 	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.android.app.routines" />
+	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.android.app.routineplus" />
 	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.android.app.whoami" />
 	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.android.samuelut" />
 	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.android.ce" />
 	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.android.mcfds" />
 	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.android.moneta" />
 	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.android.providers.downloads" />
-
+	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.android.fmm" />
+	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.storyservice" />
+	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.samsung.faceservice" />
+	
 	<!-- ========================================================================================= -->
     <!--  PDC/Moneta/DataPlatform START -->
     <!-- ========================================================================================= -->
@@ -548,5 +552,6 @@
     <allow-association target="com.samsung.android.smartsuggestions" allowed="com.spotify.music" />
     <allow-association target="com.samsung.android.smartsuggestions" allowed="com.tencent.qqmusic" />
     <allow-association target="com.samsung.android.smartsuggestions" allowed="com.google.android.apps.messaging" />
+	<allow-association target="com.samsung.android.smartsuggestions" allowed="com.google.android.googlequicksearchbox" />
     <!-- } Rune.NOW_BRIEF -->
 </config>
